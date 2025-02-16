@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * Servlet Filter for Role-Based Access Control.
  */
-@WebFilter(urlPatterns = {"/Admin/*", "/Home/*"}) // Filters requests to /Admin and /Home
+@WebFilter(urlPatterns = {"/Admin/*", "/Home/*","/Bib/*"}) // Filters requests to /Admin and /Home
 public class RoleFilter extends HttpFilter implements Filter {
 
     private static final long serialVersionUID = 1L;
@@ -63,6 +63,12 @@ public class RoleFilter extends HttpFilter implements Filter {
         } else if (requestURI.startsWith(req.getContextPath() + "/Home")) {
             if (!"user".equalsIgnoreCase(role)) {
                 System.out.println("[RoleFilter] Access denied: Only users can access Home.");
+                res.sendRedirect(req.getContextPath() + "/Error");
+                return;
+            }
+        }else if (requestURI.startsWith(req.getContextPath() + "/Bib")) {
+            if (!"bibliothecaire".equalsIgnoreCase(role)) {
+                System.out.println("[RoleFilter] Access denied: Only bibleothecaires can access Home.");
                 res.sendRedirect(req.getContextPath() + "/Error");
                 return;
             }

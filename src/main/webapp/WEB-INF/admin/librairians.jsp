@@ -21,12 +21,12 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="Admin/Bibleo">Biliotecaires</a>
+                <a class="nav-link active" aria-current="page" href="Bibleo">Biliotecaires</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="ChangePass">change password</a>
               </li>
-              <li><a class="navbar-brand" href="Logout">Logout</a></li>
+              <li><a class="navbar-brand" href="<%=request.getContextPath() %>/Logout">Logout</a></li>
             </ul>
           </div>
         </div>
@@ -55,29 +55,29 @@
 <h2>Admin Dashboard</h2>
 
 
-<h3 class="text-center">Book Collection</h3>
+<h3 class="text-center">les Bibliothecaires</h3>
 <div class="container-fluid mt-4">
               <table class="table table-striped">
-            <th>ISBN</th>
-            <th>Titre</th>
-            <th>Auteur</th>
-            <th>Image</th>
-            <th>Date de publication</th>
-            <th>quantite Disponible</th>
+              <tr>
+            <th>Numero</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Password</th>
             <th colspan="2">Action</th>
+            </tr>
 <%
-    for (Book book : BookDB.getBooks().values()) {
+    for (User user:UserDB.getBib().values()) {
 %>
      <tr>
-      <td><%=book.getISBN() %></td>
-            <td><%=book.getTitre() %></td>
-            <td><%=book.getAuteur() %></td>
-            <td><img src="<%= book.getImage()%>" width="80" height="80" class="img-thumbnail"></td>
-            <td><%=book.getPublication() %></td>
-            <td><%=book.getQuantity() %></td>
-            <td><a class="btn btn-circle  btn-primary" href="Admin/EditBook?isbn=<%=book.getISBN() %>">Edit</a></td>
+      <td><%=user.getNumero() %></td>
+            <td><%=user.getNom() %></td>
+            <td><%=user.getPrenom() %></td>
+            <td><%=user.getEmail() %></td>
+            <td><%=user.getPassword() %></td>
+            <td><a class="btn btn-circle  btn-primary" href="Admin/EditBib?id=<%=user.getNumero() %>">Edit</a></td>
             <td>
-            <a href="Admin/DeleteBook?isbn=<%= book.getISBN() %>" class="btn btn-danger">Delete</a>
+            <a href="Admin/DeleteBib?isbn=<%= user.getNumero() %>" class="btn btn-danger">Delete</a>
         </td>
             </tr>
 
@@ -91,34 +91,29 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
            
-                <h2 class="text-center">Addbook </h2>
-                <form action="Admin" method="post">
+                <h2 class="text-center">Ajouter un Bibliothecaire </h2>
+                <form action="Bibleo" method="post">
                     <div class="form-group">
-                        <label >ISBN</label>
-                        <input type="text" name="isbn" class="form-control"  placeholder="Entrer ISBN">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="titre">Titre</label>
-                        <input type="titre" name="titre" class="form-control"  placeholder="Entrer titre">
+                        <label for="nom">Numero</label>
+                        <input type="text" name="numero" class="form-control"  placeholder="Enter Matricule">
                     </div>
                     <div class="form-group">
-                        <label for="auteur">Auteur</label>
-                        <input type="text" name="auteur" class="form-control"  placeholder="Entrer auteur">
+                        <label for="nom">Nom </label>
+                        <input type="text" name="nom" class="form-control"  placeholder="Enter nom">
+                    </div>
+                          <div class="form-group">
+                        <label for="nom">Prenom </label>
+                        <input type="text" name="prenom" class="form-control"  placeholder="Enter Prenom">
+                    </div>
+                       <div class="form-group">
+                        <label for="email">Email </label>
+                        <input type="email" name="email" class="form-control"  placeholder="Enter Email">
                     </div>
                     <div class="form-group">
-                        <label for="auteur">Lien de l'Image</label>
-                        <input type="text" name="image" class="form-control"  placeholder="Entrer auteur">
-                    </div>
-                    <div class="form-group">
-                        <label for="anne">Annee</label>
-                        <input type="text" name="annee" class="form-control"  placeholder="Enter Annee de pub">
-                    </div>
-                    <div class="form-group">
-                        <label for="quanite">quantite</label>
-                        <input type="number" name="quantite" class="form-control"  placeholder="Quantite">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">AddBook</button>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control"  placeholder="Password">
+                    </div>                    
+                    <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
                 </form>
 
             </div>
