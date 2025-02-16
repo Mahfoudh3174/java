@@ -56,6 +56,7 @@
 
 <div class="container-fluid mt-4">
               <table class="table table-striped">
+              <tr>
             <th>ISBN</th>
             <th>Titre</th>
             <th>Auteur</th>
@@ -63,6 +64,7 @@
             <th>Date de publication</th>
             <th>Date de Retour</th>
             <th colspan="2">Action</th>
+            </tr>
 <%
     for (Emprunt em:Gestion.getEmprunts().values()) {
     	if(em.getNumero().equals(id)){
@@ -76,10 +78,14 @@
             <td><img src="<%= book.getImage()%>" width="80" height="80" class="img-thumbnail"></td>
             <td><%=book.getPublication() %></td>
             <td>Avant: <%=em.getDateR() %></td>
-            <td><a class="btn btn-circle  btn-primary" href="Admin/EditBook?isbn=<%=book.getISBN() %>">Retour/a></td>
+            <td><a class="btn btn-circle  btn-primary" href="Home/Retourn?isbn=<%=book.getISBN() %>">Retourner</a></td>
+            
+            <%if(em.getStatut().equals("emprunter")) {%>
             <td>
-            <a href="Admin/DeleteBook?isbn=<%=em.getId() %>" class="btn btn-danger">Delete</a>
-        </td>
+            <a href="<%=book.getImage() %>" class="btn btn-success">Visualiser</a>
+            </td>
+            <%} %>
+        
             </tr>
 
     

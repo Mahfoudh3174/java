@@ -12,7 +12,7 @@ public class Emprunt {
 		private Date dateE;
 		private Date dateR;
 		private String ISBN;
-		private String statut="en attente"; 
+		private String statut="emprunter"; 
 		
 	    public Emprunt() {
 	    	

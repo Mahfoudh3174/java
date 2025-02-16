@@ -36,7 +36,7 @@ public class Gestion {
 	        Emprunt existingEmprunt = findEmp(em.getNumero(), em.getISBN());
 
 	        if (existingEmprunt != null) {  
-	            if ("en attente".equals(existingEmprunt.getStatut())) {
+	            if ("emprunter".equals(existingEmprunt.getStatut())) {
 	                return false; // Already pending, do not add
 	            } else if ("retourner".equals(existingEmprunt.getStatut())) {
 	                emprunts.put(em.getId(), em); // Re-add if returned
@@ -57,13 +57,7 @@ public class Gestion {
 	        );
 	    }
 
-	    public static void accepter(String numero, String isbn) {
-	        Emprunt em = findEmp(numero, isbn);
-	        if (em != null) {
-	            em.setStatut("emprunter");
-	            BookDB.decrement(isbn);
-	        }
-	    }
+
 
 	    public static void retour(String idEmp) {
 	        Emprunt emp = findEmpId(idEmp);
