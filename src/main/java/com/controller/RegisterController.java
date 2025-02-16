@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -40,6 +40,7 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
           try {
         	  User user=new User();
             // Validate Numero
@@ -80,15 +81,15 @@ public class RegisterController extends HttpServlet {
 
             
             if(UserDB.isUser(numero)) {
-            	request.setAttribute("fail", "l'utilisateur dejas existe");
+            	session.setAttribute("fail", "l'utilisateur dejas existe");
             	request.getRequestDispatcher("register.jsp").forward(request, response);
             }
             UserDB.addUser(user);
-        	request.setAttribute("success", "user created successfuly");
+        	session.setAttribute("success", "user created successfuly");
             request.getRequestDispatcher("WEB-INF/auth/login.jsp").forward(request, response);
 
         } catch (IllegalArgumentException e) {
-            request.setAttribute("fail", e.getMessage());
+            session.setAttribute("fail", e.getMessage());
             request.getRequestDispatcher("WEB-INf/auth/register.jsp").forward(request, response);
         }
 

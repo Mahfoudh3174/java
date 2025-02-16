@@ -45,13 +45,25 @@ public class RoleFilter extends HttpFilter implements Filter {
 		 HttpServletRequest req = (HttpServletRequest) request;
 	        HttpServletResponse res = (HttpServletResponse) response;
 	        HttpSession session = req.getSession(false);
-	        if(session.getAttribute("role").equals("admin")) {
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
-		return;
+	        System.out.println("RoleFilter checking access for: " + req.getRequestURI());
+
+	        if (session == null || session.getAttribute("role") == null) {
+	        	System.out.println("Access denied: No session found.");
+	            res.sendRedirect(req.getContextPath() + "/Login");
+	            return;
 	        }
-	        req.getRequestDispatcher("WEB-INF/error.jsp").forward(req, res);
-	}
+
+	        String role = (String) session.getAttribute("role");
+
+	        if ("admin".equalsIgnoreCase(role)) {
+	            // Proceed if the user is an admin
+	            chain.doFilter(request, response);
+	        } else {
+	            // Redirect non-admin users to an error page
+	        	System.out.println("Access denied: User does not have admin privileges.");
+	            res.sendRedirect(req.getContextPath() + "/Error");
+	        }
+	    }
 
 	/**
 	 * @see Filter#init(FilterConfig)

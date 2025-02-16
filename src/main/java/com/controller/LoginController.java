@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
                     // Redirect based on role
                     switch (user.getRole()) {
                         case "admin":
-                            request.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(request, response);
+                            request.getRequestDispatcher("WEB-INF/admin/dashboard.jsp").forward(request, response);
                             break;
                         case "bibliothecaire":
                             request.getRequestDispatcher("/WEB-INF/gestionEmp.jsp").forward(request, response);
@@ -72,12 +72,12 @@ public class LoginController extends HttpServlet {
                             break;
                     }
                 } else {
-                    request.setAttribute("fail", "User not found");
+                    session.setAttribute("fail", "User not found");
                     request.getRequestDispatcher("WEB-INF/auth/login.jsp").forward(request, response);
                 }
 
         } catch (IllegalArgumentException e) {
-            request.setAttribute("fail", e.getMessage());
+            session.setAttribute("fail", e.getMessage());
             request.getRequestDispatcher("WEB-INF/auth/login.jsp").forward(request, response);
             
         }

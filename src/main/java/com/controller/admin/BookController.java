@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.admin;
 
 import jakarta.servlet.ServletException; 
 import jakarta.servlet.annotation.WebServlet;
@@ -33,7 +33,7 @@ public class BookController extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/admin/dasboard").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/admin/dashboard.jsp").forward(request, response);
 	}
 
 	/**

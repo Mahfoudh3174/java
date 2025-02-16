@@ -11,21 +11,26 @@
 
     <div class="container-fluid mt-5">
         <% 
-            String success = (String) request.getAttribute("success");
-            String fail = (String) request.getAttribute("fail");
+        
+            String success = (String) session.getAttribute("success");
+            String fail = (String) session.getAttribute("fail");
         %>
 
         <% if (success != null) { %>
             <div class="alert alert-success text-center" role="alert">
                 <%= success %>
             </div>
-        <% } %>
+        <% 
+        session.removeAttribute("success");
+        } %>
 
         <% if (fail != null) { %>
             <div class="alert alert-danger text-center" role="alert">
                 <%= fail %>
             </div>
-        <% } %>
+        <% 
+        session.removeAttribute("fail");
+        } %>
 
         <div class="row justify-content-center">
             <div class="col-md-6">
