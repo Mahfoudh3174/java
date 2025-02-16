@@ -24,7 +24,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="<%=request.getContextPath() %>/Home/History">Histoire</a>
                 </li>
-                <li><a class="navbar-brand" href="Logout">Logout</a></li>
+                <li><a class="navbar-brand" href="<%=request.getContextPath() %>/Logout">Logout</a></li>
             </ul>
         </div>
     </div>

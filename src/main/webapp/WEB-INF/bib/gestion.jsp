@@ -8,6 +8,36 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function sortTable(columnIndex) {
+            var table = document.getElementById("empruntTable");
+            var rows = Array.from(table.rows).slice(1); // Skip the header row
+            var isAscending = table.rows[0].cells[columnIndex].getAttribute("data-order") === "asc";
+
+            rows.sort(function (rowA, rowB) {
+                var cellA = rowA.cells[columnIndex].innerText.trim();
+                var cellB = rowB.cells[columnIndex].innerText.trim();
+
+                // Convert to numbers if possible
+                var numA = parseFloat(cellA);
+                var numB = parseFloat(cellB);
+
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return isAscending ? numA - numB : numB - numA;
+                } else {
+                    return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+                }
+            });
+
+            // Reverse order attribute for next click
+            table.rows[0].cells[columnIndex].setAttribute("data-order", isAscending ? "desc" : "asc");
+
+            // Re-append sorted rows
+            for (var i = 0; i < rows.length; i++) {
+                table.appendChild(rows[i]);
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -55,28 +85,25 @@
 <h3 class="text-center">Les Empruntes</h3>
 
 <div class="container-fluid mt-4">
-    <table class="table table-striped">
+    <table class="table table-striped" id="empruntTable">
         <thead>
             <tr>
-                <th>ISBN</th>
-                <th>Titre</th>
-                <th>Matricule d'etudiant</th>
-                <th>Nom de l'etudiant</th>
-                <th>Email</th>
-                <th>Date d'emprunt</th>
-                <th>Date de retour prevu</th>
-                <th>Date de retour</th>
-                <th>Statut</th>
-                <th>Actions</th>
+                <th onclick="sortTable(0)" data-order="asc" style="cursor: pointer;">ISBN</th>
+                <th onclick="sortTable(1)" data-order="asc" style="cursor: pointer;">Titre</th>
+                <th onclick="sortTable(2)" data-order="asc" style="cursor: pointer;">Matricule d'etudiant</th>
+                <th onclick="sortTable(3)" data-order="asc" style="cursor: pointer;">Nom de l'etudiant</th>
+                <th onclick="sortTable(4)" data-order="asc" style="cursor: pointer;">Email</th>
+                <th onclick="sortTable(5)" data-order="asc" style="cursor: pointer;">Date d'emprunt</th>
+                <th onclick="sortTable(6)" data-order="asc" style="cursor: pointer;">Date de retour prevu</th>
+                <th onclick="sortTable(7)" data-order="asc" style="cursor: pointer;">Date de retour</th>
+                <th onclick="sortTable(8)" data-order="asc" style="cursor: pointer;">Statut</th>
             </tr>
         </thead>
         <tbody>
         <%
-            String id = (String) session.getAttribute("id");
             for (Emprunt em : Gestion.getEmprunts().values()) {
-                if (em.getNumero().equals(id)) {
-                    User user = UserDB.findUserById(em.getNumero());
-                    Book book = (Book) BookDB.findBook(em.getISBN());
+                User user = UserDB.findUserById(em.getNumero());
+                Book book = (Book) BookDB.findBook(em.getISBN());
         %>
                     <tr>
                         <td><%= book.getISBN() %></td>
@@ -100,10 +127,8 @@
                             %>
                         </td>
                         <td><%= em.getStatut() %></td>
-
                     </tr>
         <%
-                }
             }
         %>
         </tbody>
