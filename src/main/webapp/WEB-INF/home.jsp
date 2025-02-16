@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Histoire</a>
+                    <a class="nav-link active" aria-current="page" href="<%=request.getContextPath() %>/Home/History">Histoire</a>
                 </li>
                 <li><a class="navbar-brand" href="Logout">Logout</a></li>
             </ul>

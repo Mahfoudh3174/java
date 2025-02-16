@@ -29,26 +29,27 @@ public class Gestion {
 	    }
 
 	    public static Emprunt findEmpId(String idEmp) {
-	        return emprunts.get(idEmp); // Direct lookup instead of looping
+	        return emprunts.get(idEmp); 
 	    }
 
 	    public static boolean addEmprunter(Emprunt em) {
-	        String key = em.getId(); // Assuming Emprunt has a unique ID
-	        
-	        if (emprunts.containsKey(key)) {
-	            Emprunt existingEmprunt = emprunts.get(key);
+	        Emprunt existingEmprunt = findEmp(em.getNumero(), em.getISBN());
+
+	        if (existingEmprunt != null) {  
 	            if ("en attente".equals(existingEmprunt.getStatut())) {
-	                return false; // Already pending
+	                return false; // Already pending, do not add
 	            } else if ("retourner".equals(existingEmprunt.getStatut())) {
-	                emprunts.put(key, em); // Re-add if returned
+	                emprunts.put(em.getId(), em); // Re-add if returned
 	                return true;
 	            }
-	            return false;
+	            return false; // Other cases, do nothing
 	        }
 
-	        emprunts.put(key, em); // Add new emprunt
+	        // If the emprunt does not exist, add it to the map
+	        emprunts.put(em.getId(), em);
 	        return true;
 	    }
+
 
 	    public static void deleteEmp(String numero, String isbn) {
 	        emprunts.entrySet().removeIf(entry -> 

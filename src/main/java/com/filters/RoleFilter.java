@@ -61,8 +61,8 @@ public class RoleFilter extends HttpFilter implements Filter {
                 return;
             }
         } else if (requestURI.startsWith(req.getContextPath() + "/Home")) {
-            if (!"user".equalsIgnoreCase(role) && !"admin".equalsIgnoreCase(role)) {
-                System.out.println("[RoleFilter] Access denied: Only users and admins can access Home.");
+            if (!"user".equalsIgnoreCase(role)) {
+                System.out.println("[RoleFilter] Access denied: Only users can access Home.");
                 res.sendRedirect(req.getContextPath() + "/Error");
                 return;
             }

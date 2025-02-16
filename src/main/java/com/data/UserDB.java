@@ -13,6 +13,8 @@ public class UserDB {
         User admin = new User("admin", "admin", "admin");
         admin.setNumero("1");
         users.put(admin.getNumero(), admin);
+        User user=new User();user.setNumero("123");user.setNom("houssein");user.setPassword("0000");
+        users.put(user.getNumero(), user);
     }
 
     public static void addUser(User user) {

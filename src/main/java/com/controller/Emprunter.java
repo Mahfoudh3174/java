@@ -45,7 +45,10 @@ public class Emprunter extends HttpServlet {
 			Emprunt em=new Emprunt();
 			em.setISBN(isbn);
 			em.setNumero(id);
-			Gestion.addEmprunter(em);
+			boolean e=Gestion.addEmprunter(em);
+			if(!e) {
+				throw new IllegalArgumentException("Vous-avez ce Livre dejas");
+			}
 			session.setAttribute("success", "Emprunter avec Success");
 			response.sendRedirect(request.getContextPath()+"/Home");
 		}
