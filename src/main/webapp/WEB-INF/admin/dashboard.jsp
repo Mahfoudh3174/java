@@ -61,6 +61,7 @@
             <th>ISBN</th>
             <th>Titre</th>
             <th>Auteur</th>
+            <th>Image</th>
             <th>Date de publication</th>
             <th>quantite Disponible</th>
             <th colspan="2">Action</th>
@@ -71,7 +72,7 @@
       <td><%=book.getISBN() %></td>
             <td><%=book.getTitre() %></td>
             <td><%=book.getAuteur() %></td>
-           
+            <td><img src="<%= book.getImage()%>" width="80" height="80" class="img-thumbnail"></td>
             <td><%=book.getPublication() %></td>
             <td><%=book.getQuantity() %></td>
             <td><a class="btn btn-circle  btn-primary" href="Admin/EditBook?isbn=<%=book.getISBN() %>">Edit</a></td>
@@ -104,6 +105,10 @@
                     <div class="form-group">
                         <label for="auteur">Auteur</label>
                         <input type="text" name="auteur" class="form-control"  placeholder="Entrer auteur">
+                    </div>
+                    <div class="form-group">
+                        <label for="auteur">Lien de l'Image</label>
+                        <input type="text" name="image" class="form-control"  placeholder="Entrer auteur">
                     </div>
                     <div class="form-group">
                         <label for="anne">Annee</label>

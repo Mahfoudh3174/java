@@ -7,6 +7,7 @@ public class Book {
 	private String ISBN;
 	private String titre;
 	private String auteur;
+	private String image;
 	private String publication;
 	private int quantity;
 	
@@ -15,11 +16,12 @@ public class Book {
 	}
 	
 
-	public Book(String iSBN, String titre, String auteur, String publication, int quantity) {
+	public Book(String iSBN, String titre, String auteur,String image, String publication, int quantity) {
 		
 		ISBN = iSBN;
 		this.titre = titre;
 		this.auteur = auteur;
+		this.image=image;
 		this.publication = publication;
 		this.quantity = quantity;
 	}
@@ -71,5 +73,16 @@ public class Book {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 
 }

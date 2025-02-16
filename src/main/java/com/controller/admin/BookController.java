@@ -5,8 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -41,7 +40,7 @@ public class BookController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	       
+	       HttpSession session= request.getSession();
 		try {
 			Book book=new Book();
 		    // Validate ISBN
@@ -67,7 +66,12 @@ public class BookController extends HttpServlet {
 		        throw new IllegalArgumentException("Author ne peut pas etre vide.");
 		    }
 		    book.setAuteur(auteur);
-
+		    // Validate Image
+		    String image = request.getParameter("image");
+		    if (image == null || image.trim().isEmpty()) {
+		        throw new IllegalArgumentException("Imagene peut pas etre vide.");
+		    }
+		    book.setImage(image);
 		    // Validate Publication Year
 		    String publicationYear = request.getParameter("annee");
 		    if (publicationYear == null || !publicationYear.matches("\\d{4}")) { // Validate 4-digit year
@@ -86,13 +90,13 @@ public class BookController extends HttpServlet {
 		    }
 		    book.setQuantity(quantity);
 		    BookDB.addBook(book);
-		    request.setAttribute("success","book added successfully" );
+		    session.setAttribute("success","book added successfully" );
 		    request.getRequestDispatcher("WEB-INF/admin/dashboard.jsp").forward(request, response);
             
 		    
 		} catch (IllegalArgumentException e) {
 		    // Handle validation error (e.g., forward to an error page or send an error response)
-		    request.setAttribute("fail", e.getMessage());
+		    session.setAttribute("fail", e.getMessage());
 		    request.getRequestDispatcher("WEB-INF/admin/dashboard.jsp").forward(request, response);
 		    
 		}

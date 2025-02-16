@@ -15,61 +15,65 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Servlet Filter implementation class RoleFilter
+ * Servlet Filter for Role-Based Access Control.
  */
-@WebFilter("/Admin/*")
+@WebFilter(urlPatterns = {"/Admin/*", "/Home/*"}) // Filters requests to /Admin and /Home
 public class RoleFilter extends HttpFilter implements Filter {
-       
-    /**
-     * @see HttpFilter#HttpFilter()
-     */
+
+    private static final long serialVersionUID = 1L;
+
     public RoleFilter() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void destroy() {
+        // No specific cleanup required
+    }
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		System.out.println("Hi from Role filter");
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
 
-		 HttpServletRequest req = (HttpServletRequest) request;
-	        HttpServletResponse res = (HttpServletResponse) response;
-	        HttpSession session = req.getSession(false);
-	        System.out.println("RoleFilter checking access for: " + req.getRequestURI());
+        System.out.println("[RoleFilter] Checking user role...");
 
-	        if (session == null || session.getAttribute("role") == null) {
-	        	System.out.println("Access denied: No session found.");
-	            res.sendRedirect(req.getContextPath() + "/Login");
-	            return;
-	        }
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        HttpSession session = req.getSession(false); // Get existing session, do not create a new one
 
-	        String role = (String) session.getAttribute("role");
+        String requestURI = req.getRequestURI();
+        System.out.println("[RoleFilter] Requested URI: " + requestURI);
 
-	        if ("admin".equalsIgnoreCase(role)) {
-	            // Proceed if the user is an admin
-	            chain.doFilter(request, response);
-	        } else {
-	            // Redirect non-admin users to an error page
-	        	System.out.println("Access denied: User does not have admin privileges.");
-	            res.sendRedirect(req.getContextPath() + "/Error");
-	        }
-	    }
+        // Check if session exists and user role is defined
+        if (session == null || session.getAttribute("role") == null) {
+            System.out.println("[RoleFilter] Access denied: No session or role found.");
+            res.sendRedirect(req.getContextPath() + "/Login"); // Redirect to login page
+            return;
+        }
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
+        String role = (String) session.getAttribute("role");
 
+        // Restrict access based on role and URL path
+        if (requestURI.startsWith(req.getContextPath() + "/Admin")) {
+            if (!"admin".equalsIgnoreCase(role)) {
+                System.out.println("[RoleFilter] Access denied: User is not an admin.");
+                res.sendRedirect(req.getContextPath() + "/Error"); // Redirect to error page
+                return;
+            }
+        } else if (requestURI.startsWith(req.getContextPath() + "/Home")) {
+            if (!"user".equalsIgnoreCase(role) && !"admin".equalsIgnoreCase(role)) {
+                System.out.println("[RoleFilter] Access denied: Only users and admins can access Home.");
+                res.sendRedirect(req.getContextPath() + "/Error");
+                return;
+            }
+        }
+
+        System.out.println("[RoleFilter] Access granted.");
+        chain.doFilter(request, response); // Continue with request
+    }
+
+    @Override
+    public void init(FilterConfig fConfig) throws ServletException {
+        System.out.println("[RoleFilter] Initialized.");
+    }
 }

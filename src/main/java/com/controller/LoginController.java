@@ -68,7 +68,7 @@ public class LoginController extends HttpServlet {
                             request.getRequestDispatcher("/WEB-INF/gestionEmp.jsp").forward(request, response);
                             break;
                         default:
-                            request.getRequestDispatcher("/WEB-INF/user_home.jsp").forward(request, response);
+                            request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
                             break;
                     }
                 } else {
