@@ -20,6 +20,10 @@ public class Gestion {
 	    public static Map<String, Retour> getRetours() {
 	        return retoures;
 	    }
+	    
+	    public static boolean isEmprunt(String idEmp) {
+	    	return emprunts.containsKey(idEmp);
+	    }
 
 	    public static Emprunt findEmp(String numero, String isbn) {
 	        return emprunts.values().stream()
@@ -27,7 +31,7 @@ public class Gestion {
 	                .findFirst()
 	                .orElse(null);
 	    }
-
+        
 	    public static Emprunt findEmpId(String idEmp) {
 	        return emprunts.get(idEmp); 
 	    }
@@ -35,12 +39,11 @@ public class Gestion {
 	    public static boolean addEmprunter(Emprunt em) {
 	        Emprunt existingEmprunt = findEmp(em.getNumero(), em.getISBN());
 
-	        if (existingEmprunt != null) {  
+	        if (existingEmprunt != null) {
 	            if ("emprunter".equals(existingEmprunt.getStatut())) {
-	                return false; // Already pending, do not add
+	                return false; // Already borrowed and not returned
 	            } else if ("retourner".equals(existingEmprunt.getStatut())) {
-	                emprunts.put(em.getId(), em); // Re-add if returned
-	                return true;
+	                return false; // Prevent borrowing the same book multiple times
 	            }
 	            return false; // Other cases, do nothing
 	        }
@@ -49,6 +52,7 @@ public class Gestion {
 	        emprunts.put(em.getId(), em);
 	        return true;
 	    }
+
 
 
 	    public static void deleteEmp(String numero, String isbn) {
@@ -61,7 +65,7 @@ public class Gestion {
 
 	    public static void retour(String idEmp) {
 	        Emprunt emp = findEmpId(idEmp);
-	        if (emp != null) {
+	        
 	            emp.setStatut("retourner");
 
 	            Date date = new Date();
@@ -69,7 +73,7 @@ public class Gestion {
 	            retoures.put(idEmp, re);
 
 	            BookDB.increment(emp.getISBN());
-	        }
+	        
 	    }
 
 	    public static Date findRetour(String idEmp) {

@@ -14,7 +14,7 @@
 
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="Home"><b>Collection</b></a>
+        <a class="navbar-brand" href="<%=request.getContextPath() %>/Home"><b>Collection</b></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -78,13 +78,18 @@
             <td><img src="<%= book.getImage()%>" width="80" height="80" class="img-thumbnail"></td>
             <td><%=book.getPublication() %></td>
             <td>Avant: <%=em.getDateR() %></td>
-            <td><a class="btn btn-circle  btn-primary" href="Home/Retourn?isbn=<%=book.getISBN() %>">Retourner</a></td>
-            
-            <%if(em.getStatut().equals("emprunter")) {%>
+
             <td>
+            <%if(em.getStatut().equals("emprunter")) {%>
+                        
+            <a class="btn btn-circle  btn-primary" href="Retourne?idEmp=<%=em.getId() %>">Retourner</a>
+            
             <a href="<%=book.getImage() %>" class="btn btn-success">Visualiser</a>
-            </td>
+            
+            <%}else{ %>
+            Retourner
             <%} %>
+        </td>
         
             </tr>
 
