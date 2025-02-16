@@ -55,6 +55,9 @@ public class RegisterController extends HttpServlet {
             if (nom == null || nom.trim().isEmpty() ) {
                 throw new IllegalArgumentException("Nom ne peut pas etre vide.");
             }
+            if (!UserDB.isUnique(nom)) {
+          	  throw new IllegalArgumentException("utilisateur dejas existe.");
+            }
             user.setNom(nom);
 
             // Validate Prenom

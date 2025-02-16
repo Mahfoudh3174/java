@@ -9,8 +9,8 @@
 <body>
     <div class="container-fluid mt-4">
         <% 
-            String success = (String) request.getAttribute("success");
-            String fail = (String) request.getAttribute("fail");
+            String success = (String) session.getAttribute("success");
+            String fail = (String) session.getAttribute("fail");
         %>
 
         <% if (success != null) { %>

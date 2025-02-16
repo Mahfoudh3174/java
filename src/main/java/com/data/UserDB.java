@@ -44,6 +44,9 @@ public class UserDB {
                 .orElse(null);
     }
 
+    public static boolean isUnique(String nom) {
+        return users.values().stream().noneMatch(user -> user.getNom().equals(nom));
+    }
 
 
     public static void deleteUser(String id) {

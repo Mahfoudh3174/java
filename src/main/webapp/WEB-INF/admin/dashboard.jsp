@@ -101,8 +101,8 @@
                     <td><img src="<%= book.getImage() %>" width="80" height="80" class="img-thumbnail"></td>
                     <td><%= book.getPublication() %></td>
                     <td><%= book.getQuantity() %></td>
-                    <td><a class="btn btn-primary" href="Admin/EditBook?isbn=<%= book.getISBN() %>">Edit</a></td>
-                    <td><a href="Admin/DeleteBook?isbn=<%= book.getISBN() %>" class="btn btn-danger">Delete</a></td>
+                    <td><a class="btn btn-primary" href="<%=request.getContextPath() %>/EditBook?isbn=<%= book.getISBN() %>">Edit</a></td>
+                    <td><a href="/DeleteBook?isbn=<%= book.getISBN() %>" class="btn btn-danger">Delete</a></td>
                 </tr>
                 <%
                     }

@@ -80,9 +80,8 @@ public class Bibleo extends HttpServlet {
           user.setPassword(password);
 
           
-          if(UserDB.isUser(numero)) {
-          	session.setAttribute("fail", "le Bibliothecaire dejas existe");
-          	request.getRequestDispatcher("/WEB-INF/admin/librairians.jsp").forward(request, response);
+          if(UserDB.isUser(numero) || !UserDB.isUnique(nom)) {
+        	  throw new IllegalArgumentException("Bibliothecaire dejas existe.");
           }
           user.setRole("bibliothecaire");
           UserDB.addUser(user);

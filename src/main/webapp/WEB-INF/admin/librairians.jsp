@@ -77,7 +77,7 @@
             <td><%=user.getPassword() %></td>
             <td><a class="btn btn-circle  btn-primary" href="Admin/EditBib?id=<%=user.getNumero() %>">Edit</a></td>
             <td>
-            <a href="Admin/DeleteBib?isbn=<%= user.getNumero() %>" class="btn btn-danger">Delete</a>
+            <a href="DeleteBibleo?id=<%= user.getNumero() %>" class="btn btn-danger">Delete</a>
         </td>
             </tr>
 
