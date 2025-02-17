@@ -60,15 +60,13 @@ public class UserDB {
     public static boolean isUser(String id) {
         return users.containsKey(id);
     }
-
-    public static void editPass(String password) {
-        User admin = users.values().stream()
-                .filter(user -> "admin".equals(user.getRole()))
-                .findFirst()
-                .orElse(null);
-        if (admin != null) {
-            admin.setPassword(password);
-        }
+    public static String findPassword(String id) {
+    	return users.get(id).getPassword();
+    }
+    
+    public static void editPass(String id,String newpassword) {
+        User admin=users.get(id);
+        admin.setPassword(newpassword);
     }
 
     public static void editUser(User user) {

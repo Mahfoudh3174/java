@@ -49,9 +49,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" href="Admin/Bibleo">Bibliothécaires</a></li>
-                <li class="nav-item"><a class="nav-link active" href="ChangePass">Change Password</a></li>
-                <li><a class="navbar-brand" href="Logout">Logout</a></li>
+                <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath() %>/Admin/Bibleo">Bibliothécaires</a></li>
+                <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath() %>/Admin/EditPassword">Change Password</a></li>
+                <li><a class="navbar-brand" href="<%=request.getContextPath() %>/Logout">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -101,8 +101,8 @@
                     <td><img src="<%= book.getImage() %>" width="80" height="80" class="img-thumbnail"></td>
                     <td><%= book.getPublication() %></td>
                     <td><%= book.getQuantity() %></td>
-                    <td><a class="btn btn-primary" href="<%=request.getContextPath() %>/EditBook?isbn=<%= book.getISBN() %>">Edit</a></td>
-                    <td><a href="/DeleteBook?isbn=<%= book.getISBN() %>" class="btn btn-danger">Delete</a></td>
+                    <td><a class="btn btn-primary" href="<%=request.getContextPath() %>/Admin/EditBook?isbn=<%= book.getISBN() %>">Edit</a></td>
+                    <td><a href="<%=request.getContextPath() %>/Admin/DeleteBook?isbn=<%= book.getISBN() %>" class="btn btn-danger">Delete</a></td>
                 </tr>
                 <%
                     }

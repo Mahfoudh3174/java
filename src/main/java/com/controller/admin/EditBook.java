@@ -39,13 +39,14 @@ public class EditBook extends HttpServlet {
 			if(isbn==null || !BookDB.isBook(isbn)) {
 				throw new IllegalArgumentException("Invalid parameter");
 			}
-			request.setAttribute("isbn", isbn);
+			Book book=BookDB.findBook(isbn);
+			session.setAttribute("book", book);
 			request.getRequestDispatcher("/WEB-INF/admin/editBook.jsp").forward(request, response);
 		}
 		catch (IllegalArgumentException e) {
 			// TODO: handle exception
 			session.setAttribute("fail", e.getMessage());
-			response.sendRedirect(request.getContextPath() + "/Admin");
+			request.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(request, response);
 		}
 	}
 
@@ -98,12 +99,13 @@ public class EditBook extends HttpServlet {
  		    book.setQuantity(quantity);
  		    BookDB.editBook(book);
  		   session.setAttribute("success", "Editer avec success");
-			response.sendRedirect(request.getContextPath() + "/Admin");
+ 		   session.removeAttribute("book");
+ 		  request.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(request, response);
 	}
 		catch (IllegalArgumentException e) {
 			// TODO: handle exception
 			session.setAttribute("fail", e.getMessage());
-			response.sendRedirect(request.getContextPath() + "/Admin/EditBook");
+			request.getRequestDispatcher("/WEB-INF/admin/editBook.jsp").forward(request, response);
 		}
 
 	}
