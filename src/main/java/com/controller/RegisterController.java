@@ -91,7 +91,7 @@ public class RegisterController extends HttpServlet {
             UserDB.addUser(user);
         	session.setAttribute("success", "user created successfuly");
         	
-            request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/auth/login.jsp").forward(request, response);
 
         } catch (IllegalArgumentException e) {
             session.setAttribute("fail", e.getMessage());
