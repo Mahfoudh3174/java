@@ -35,7 +35,7 @@ public class Emprunter extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
-		System.out.println("Emprunter=>"+session.getAttribute("id"));
+		
 		try {
 			String isbn=request.getParameter("isbn");
 			if(isbn==null || !BookDB.isBook(isbn)) {

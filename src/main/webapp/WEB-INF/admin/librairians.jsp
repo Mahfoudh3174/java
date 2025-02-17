@@ -80,9 +80,9 @@
             <td><%=user.getPrenom() %></td>
             <td><%=user.getEmail() %></td>
             <td><%=user.getPassword() %></td>
-            <td><a class="btn btn-circle  btn-primary" href="Admin/EditBib?id=<%=user.getNumero() %>">Edit</a></td>
+            <td><a class="btn btn-circle  btn-primary" href="<%=request.getContextPath() %>/Admin/EditBibleo?id=<%=user.getNumero() %>">Edit</a></td>
             <td>
-            <a href="DeleteBibleo?id=<%= user.getNumero() %>" class="btn btn-danger">Delete</a>
+            <a href="<%=request.getContextPath() %>/Admin/DeleteBibleo?id=<%= user.getNumero() %>" class="btn btn-danger">Delete</a>
         </td>
             </tr>
 
