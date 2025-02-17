@@ -46,7 +46,8 @@ public class EditBook extends HttpServlet {
 		catch (IllegalArgumentException e) {
 			// TODO: handle exception
 			session.setAttribute("fail", e.getMessage());
-			request.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Admin");
+			//request.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(request, response);
 		}
 	}
 
@@ -100,12 +101,14 @@ public class EditBook extends HttpServlet {
  		    BookDB.editBook(book);
  		   session.setAttribute("success", "Editer avec success");
  		   session.removeAttribute("book");
- 		  request.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(request, response);
+ 		   response.sendRedirect(request.getContextPath() + "/Admin");
+ 		  //request.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(request, response);
 	}
 		catch (IllegalArgumentException e) {
 			// TODO: handle exception
 			session.setAttribute("fail", e.getMessage());
-			request.getRequestDispatcher("/WEB-INF/admin/editBook.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Admin/EditBook");
+			//request.getRequestDispatcher("/WEB-INF/admin/editBook.jsp").forward(request, response);
 		}
 
 	}

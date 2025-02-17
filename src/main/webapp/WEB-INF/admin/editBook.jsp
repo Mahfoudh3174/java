@@ -19,8 +19,19 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-             <li><a class="navbar-brand" href="<%=request.getContextPath() %>/ogout">Logout</a></li>
+            <ul class="navbar-nav"> 
+                <li class="nav-item">
+                <a class="nav-link active" href="<%=request.getContextPath() %>/Admin">Main</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="<%=request.getContextPath() %>/Admin/Bibleo">Bibliothécaires</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="<%=request.getContextPath() %>/EditPassword">Change Password</a>
+                </li>
+                <li>
+                <a class="navbar-brand" href="<%=request.getContextPath() %>/Logout">Logout</a>
+                </li>
             </ul>
           </div>
         </div>
@@ -46,9 +57,9 @@
         session.removeAttribute("fail");
         } %>
 <%
-   if(session.getAttribute("book")==null){
-	   response.sendRedirect(request.getContextPath());
-   }
+ //  if(session.getAttribute("book")==null){
+//	   response.sendRedirect(request.getContextPath());
+//   }
     Book book=(Book) session.getAttribute("book");
     
 %>

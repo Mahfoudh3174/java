@@ -50,9 +50,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li><a class="navbar-brand" href="Route?path=users">Etudiants</a></li>
-                <li><a class="navbar-brand" href="Route?path=gestion">Empruntes</a></li>
-                <li><a class="navbar-brand" href="Logout">Logout</a></li>
+            <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Gestion">Gestion</a></li>
+                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Users">Etudiants</a></li>
+                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Users">Empruntes</a></li>
+                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Logout">Logout</a></li>
             </ul>
         </div>
     </div>

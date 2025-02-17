@@ -11,58 +11,56 @@ import java.io.IOException;
 
 import com.data.UserDB;
 
-/**
- * Servlet implementation class EditPassword
- */
 @WebServlet("/EditPassword")
 public class EditPassword extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+
     public EditPassword() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/admin/password.jsp").forward(request, response);
-	}
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/password.jsp").forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session=request.getSession();
-		String id =(String) session.getAttribute("id");
-		try {
-			String oldpass=request.getParameter("oldpassword");
-			if(oldpass==null || oldpass.trim().isEmpty() ) {
-				throw new IllegalArgumentException("Mot de passe ne peut pas etre vide");
-			}
-			String newpass=request.getParameter("newpassword");
-			if(newpass==null || newpass.trim().isEmpty() ) {
-				throw new IllegalArgumentException("Mot de passe ne peut pas etre vide");
-			}
-			if(newpass.equals(oldpass) ) {
-				throw new IllegalArgumentException("les Mot de passe ne peuvent pas etre identiques");
-			}
-			if(UserDB.findPassword(id).equals(oldpass) ) {
-				throw new IllegalArgumentException("Mot de passe ne peut pas etre vide");
-			}
-			session.setAttribute("success", "Mot de passe Editer avec success");
-			request.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(request, response);
-		}catch (IllegalArgumentException e) {
-			// TODO: handle exception
-			session.setAttribute("success", e.getMessage());
-			request.getRequestDispatcher("/WEB-INF/admin/password.jsp").forward(request, response);
-		}
-	}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
 
+        if (id == null || !UserDB.isUser(id)) {
+            response.sendRedirect(request.getContextPath() + "/Login");
+            return;
+        }
+
+        try {
+            String oldPass = request.getParameter("oldpassword");
+            String newPass = request.getParameter("newpassword");
+
+            if (oldPass == null || oldPass.trim().isEmpty()) {
+                throw new IllegalArgumentException("L'ancien mot de passe ne peut pas être vide.");
+            }
+            if (newPass == null || newPass.trim().isEmpty()) {
+                throw new IllegalArgumentException("Le nouveau mot de passe ne peut pas être vide.");
+            }
+            if (newPass.equals(oldPass)) {
+                throw new IllegalArgumentException("Le nouveau mot de passe ne peut pas être identique à l'ancien.");
+            }
+            if (UserDB.findPassword(id).equals(newPass)) {
+                throw new IllegalArgumentException("Ce mot de passe est déjà utilisé par vous.");
+            }
+            if (!UserDB.findPassword(id).equals(oldPass)) {
+                throw new IllegalArgumentException("L'ancien mot de passe est incorrect.");
+            }
+
+            UserDB.editPass(id, newPass);
+            session.setAttribute("success", "Mot de passe modifié avec succès.");
+            response.sendRedirect(request.getContextPath() + "/EditPassword"); 
+
+        } catch (IllegalArgumentException e) {
+            session.setAttribute("fail", e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/EditPassword");
+        }
+    }
 }

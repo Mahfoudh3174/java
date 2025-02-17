@@ -91,13 +91,15 @@ public class BookController extends HttpServlet {
 		    book.setQuantity(quantity);
 		    BookDB.addBook(book);
 		    session.setAttribute("success","book added successfully" );
-		    request.getRequestDispatcher("WEB-INF/admin/dashboard.jsp").forward(request, response);
+		    response.sendRedirect(request.getContextPath()+"/Admin");
+		    //request.getRequestDispatcher("WEB-INF/admin/dashboard.jsp").forward(request, response);
             
 		    
 		} catch (IllegalArgumentException e) {
 		    // Handle validation error (e.g., forward to an error page or send an error response)
 		    session.setAttribute("fail", e.getMessage());
-		    request.getRequestDispatcher("WEB-INF/admin/dashboard.jsp").forward(request, response);
+		    response.sendRedirect(request.getContextPath()+"/Admin");
+		    //request.getRequestDispatcher("WEB-INF/admin/dashboard.jsp").forward(request, response);
 		    
 		}
 	}

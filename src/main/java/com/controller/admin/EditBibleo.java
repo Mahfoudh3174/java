@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class Librairian
+ * Servlet implementation class EditBibleo
  */
-@WebServlet("/Librairian")
-public class Librairian extends HttpServlet {
+@WebServlet("/EditBibleo")
+public class EditBibleo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Librairian() {
+    public EditBibleo() {
         super();
         // TODO Auto-generated constructor stub
     }

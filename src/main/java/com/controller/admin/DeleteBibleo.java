@@ -39,11 +39,13 @@ public class DeleteBibleo extends HttpServlet {
 			}
 			UserDB.deleteUser(id);
 			session.setAttribute("success", "Suprimer avec success");
-	          request.getRequestDispatcher("/WEB-INF/admin/librairians.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/Admin/Bibleo");
+	         // request.getRequestDispatcher("/WEB-INF/admin/librairians.jsp").forward(request, response);
 		}catch (IllegalArgumentException e) {
 			// TODO: handle exception
 			session.setAttribute("fail", e.getMessage());
-	          request.getRequestDispatcher("/WEB-INF/admin/librairians.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/Admin/Bibleo");
+	         // request.getRequestDispatcher("/WEB-INF/admin/librairians.jsp").forward(request, response);
 		}
 	}
 

@@ -86,11 +86,13 @@ public class Bibleo extends HttpServlet {
           user.setRole("bibliothecaire");
           UserDB.addUser(user);
       	session.setAttribute("success", "Bibliothecaire ajouter avec success");
-      	request.getRequestDispatcher("/WEB-INF/admin/librairians.jsp").forward(request, response);
+      	response.sendRedirect(request.getContextPath()+"/Admin/Bibleo");
+      	//request.getRequestDispatcher("/WEB-INF/admin/librairians.jsp").forward(request, response);
 
       } catch (IllegalArgumentException e) {
           session.setAttribute("fail", e.getMessage());
-          request.getRequestDispatcher("/WEB-INF/admin/librairians.jsp").forward(request, response);
+          response.sendRedirect(request.getContextPath()+"/Admin/Bibleo");
+         // request.getRequestDispatcher("/WEB-INF/admin/librairians.jsp").forward(request, response);
       }
 	}
 
