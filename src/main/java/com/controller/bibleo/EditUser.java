@@ -1,4 +1,4 @@
-package com.controller.admin;
+package com.controller.bibleo;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,17 +13,16 @@ import com.data.UserDB;
 import com.model.User;
 
 /**
- * Servlet implementation class EditBibleo
+ * Servlet implementation class EditUser
  */
-@WebServlet("/Admin/EditBibleo")
-public class EditBibleo extends HttpServlet {
+@WebServlet("/Bib/EditUser")
+public class EditUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-	
-    public EditBibleo() {
+    public EditUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,13 +38,13 @@ public class EditBibleo extends HttpServlet {
 			if(id==null || !UserDB.isUser(id)) {
 				throw new IllegalArgumentException("Invalid Parameter");
 			}
-			User bib=UserDB.findUserById(id);
-			session.setAttribute("bib", bib);
-			request.getRequestDispatcher("/WEB-INF/admin/editBibleo.jsp").forward(request, response);
+			User user=UserDB.findUserById(id);
+			session.setAttribute("user", user);
+			request.getRequestDispatcher("/WEB-INF/bib/editUser.jsp").forward(request, response);
 		}catch (IllegalArgumentException e) {
 			// TODO: handle exception
 			session.setAttribute("fail", e.getMessage());
-			response.sendRedirect(request.getContextPath()+"/Admin");
+			response.sendRedirect(request.getContextPath()+"/Bib/Gestion");
 		}
 	}
 
@@ -70,6 +69,7 @@ public class EditBibleo extends HttpServlet {
           if (nom == null || nom.trim().isEmpty() ) {
               throw new IllegalArgumentException("Nom ne peut pas etre vide.");
           }
+          
           if(!nom.equals(user.getNom())) {
           if(!UserDB.isUnique(nom)) {
         	  throw new IllegalArgumentException("Nom est utilise par un autre utilisateur.");
@@ -93,22 +93,17 @@ public class EditBibleo extends HttpServlet {
           }
           user.setEmail(email);
 
-          // Validate Password
-          String password = request.getParameter("password");
-          if (password == null || password.trim().isEmpty()) {
-              throw new IllegalArgumentException("Mot de passe ne peut pas etre vide.");
-          }
-          user.setPassword(password);
 
-          user.setRole("bibliothecaire");
+
+          
           UserDB.editUser(user);
       	session.setAttribute("success", "user editer avec success");
-      	session.removeAttribute("bib");
-      	response.sendRedirect(request.getContextPath()+"/Admin/Bibleo");
+      	session.removeAttribute("user");
+      	response.sendRedirect(request.getContextPath()+"/Bib/Users");
 
       } catch (IllegalArgumentException e) {
           session.setAttribute("fail", e.getMessage());
-          response.sendRedirect(request.getContextPath()+"/Admin/Bibleo");
+          response.sendRedirect(request.getContextPath()+"/Bib/Users");
       }
 	}
 

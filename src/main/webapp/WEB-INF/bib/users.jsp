@@ -15,15 +15,16 @@
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
         </h2>
-          <a class="navbar-brand" href="<%=request.getContextPath()%>/Gestion"><b>Dashboard </b></a>
+          <a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Gestion"><b>Dashboard </b></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Gestion">Gestion</a></li>
-                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Users">Etudiants</a></li>
-                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/EditPassword">Change Password</a></li>
-                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Logout">Logout</a></li>
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/Gestion">Gestion</a></li>
+                <li class="nav-item" ><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/Users">Etudiants</a></li>
+                <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/EditPassword">Change Password</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a></li>
             </ul>
           </div>
         </div>
@@ -69,7 +70,7 @@
             <td><%=user.getNom() %></td>
             <td><%=user.getPrenom() %></td>
             <td><%=user.getEmail() %></td>
-             <td><a class="btn btn-warning" href="EditUser?id=<%=user.getNumero()%>" >Editer</a></td>
+             <td><a class="btn btn-warning" href="<%=request.getContextPath()%>/Bib/EditUser?id=<%=user.getNumero()%>" >Editer</a></td>
             </tr>
 
     

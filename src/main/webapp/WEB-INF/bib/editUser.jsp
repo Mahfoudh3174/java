@@ -11,24 +11,16 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="Admin"><b>Dashboard</b></a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Gestion"><b>Dashboard</b></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <a class="nav-link active" href="<%=request.getContextPath() %>/Admin">Main</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link active" href="<%=request.getContextPath() %>/Admin/Bibleo">Bibliothécaires</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link active" href="<%=request.getContextPath() %>/EditPassword">Change Password</a>
-                </li>
-                <li>
-                <a class="navbar-brand" href="<%=request.getContextPath() %>/Logout">Logout</a>
-                </li>
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/Gestion">Gestion</a></li>
+                <li class="nav-item" ><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/Users">Etudiants</a></li>
+                <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/EditPassword">Change Password</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -55,36 +47,36 @@
             session.removeAttribute("fail");
             } 
             
-            User bib = (User) session.getAttribute("bib");
+            User user = (User) session.getAttribute("user");
         %>
 
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center">Modifier Bibliothécaire</h2>
-                <form action="EditBibleo" method="post">
+                <h2 class="text-center">Modifier Utilisateur</h2>
+                <form action="EditUser" method="post">
                     <div class="form-group">
-                        <label for="numero">Numéro</label>
+                        
                         <input type="hidden" name="numero" class="form-control" 
-                            value="<%= (bib != null) ? bib.getNumero() : ""%>" >
+                            value="<%= (user != null) ? user.getNumero() : ""%>" >
                     </div>
                     <div class="form-group">
                         <label for="nom">Nom</label>
                         <input type="text" name="nom" class="form-control" 
-                            value="<%= (bib != null) ? bib.getNom() : "" %>" placeholder="Entrer le nom">
+                            value="<%= (user != null) ? user.getNom() : "" %>" placeholder="Entrer le nom">
                     </div>
                     <div class="form-group">
                         <label for="prenom">Prénom</label>
                         <input type="text" name="prenom" class="form-control" 
-                            value="<%= (bib != null) ? bib.getPrenom() : "" %>" placeholder="Entrer le prénom">
+                            value="<%= (user != null) ? user.getPrenom() : "" %>" placeholder="Entrer le prénom">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" name="email" class="form-control" 
-                            value="<%= (bib != null) ? bib.getEmail() : "" %>" placeholder="Entrer l'email">
+                            value="<%= (user != null) ? user.getEmail() : "" %>" placeholder="Entrer l'email">
                     </div>
                     <div class="form-group">
                         <label for="password">Mot de passe</label>
-                        <input type="password" name="password" class="form-control" value="<%= (bib != null) ? bib.getPassword() : "" %>" placeholder="Nouveau mot de passe">
+                        <input type="password" name="password" class="form-control" value="<%= (user != null) ? user.getPassword() : "" %>" placeholder="Nouveau mot de passe">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Modifier</button>
                 </form>
