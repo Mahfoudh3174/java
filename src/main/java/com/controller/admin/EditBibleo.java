@@ -69,6 +69,9 @@ public class EditBibleo extends HttpServlet {
           if (nom == null || nom.trim().isEmpty() ) {
               throw new IllegalArgumentException("Nom ne peut pas etre vide.");
           }
+          if(!UserDB.isUnique(nom)) {
+        	  throw new IllegalArgumentException("Nom est utilise par un autre utilisateur.");
+          }
           user.setNom(nom);
 
           // Validate Prenom

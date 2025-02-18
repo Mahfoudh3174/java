@@ -78,7 +78,8 @@ public class LoginController extends HttpServlet {
 
         } catch (IllegalArgumentException e) {
             session.setAttribute("fail", e.getMessage());
-            request.getRequestDispatcher("WEB-INF/auth/login.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath()+"Login");
+            //request.getRequestDispatcher("WEB-INF/auth/login.jsp").forward(request, response);
             
         }
 	}
