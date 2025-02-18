@@ -11,24 +11,19 @@
 
 </head>
 <body>
-<%
-    
-    String id = (String) session.getAttribute("id");
 
-    if (id == null) {
-        response.sendRedirect("login.jsp");
-    }
-%>
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
         </h2>
-          <a class="navbar-brand" href="Route?path=empuntes"><b>Dashboard </b></a>
+          <a class="navbar-brand" href="<%=request.getContextPath()%>/Gestion"><b>Dashboard </b></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li><a class="navbar-brand " href="Route?path=logout">Logout</a></li>
+            <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Gestion">Gestion</a></li>
+                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Users">Etudiants</a></li>
+                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/EditPassword">Change Password</a></li>
+                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Logout">Logout</a></li>
             </ul>
           </div>
         </div>

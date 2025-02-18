@@ -52,7 +52,7 @@
             <ul class="navbar-nav">
             <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Gestion">Gestion</a></li>
                 <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Users">Etudiants</a></li>
-                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Users">Empruntes</a></li>
+                <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/EditPassword">Change Password</a></li>
                 <li><a class="navbar-brand" href="<%=request.getContextPath()%>/Logout">Logout</a></li>
             </ul>
         </div>
