@@ -86,12 +86,13 @@ public class RegisterController extends HttpServlet {
             if(UserDB.isUser(numero)) {
             	session.setAttribute("fail", "l'utilisateur dejas existe");
             	response.sendRedirect(request.getContextPath()+"/Register");
+            	return;
             	//request.getRequestDispatcher("/WEB-INF/auth/register.jsp").forward(request, response);
             }
             UserDB.addUser(user);
         	session.setAttribute("success", "user created successfuly");
-        	
-            request.getRequestDispatcher("/WEB-INF/auth/login.jsp").forward(request, response);
+        	response.sendRedirect(request.getContextPath()+"/Login");
+            //request.getRequestDispatcher("/WEB-INF/auth/login.jsp").forward(request, response);
 
         } catch (IllegalArgumentException e) {
             session.setAttribute("fail", e.getMessage());

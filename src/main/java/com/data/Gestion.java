@@ -1,5 +1,6 @@
 package com.data;
 
+import java.nio.file.FileSystems;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,21 +38,41 @@ public class Gestion {
 	    }
 
 	    public static boolean addEmprunter(Emprunt em) {
-	        Emprunt existingEmprunt = findEmp(em.getNumero(), em.getISBN());
-
-	        if (existingEmprunt != null) {
-	            if ("emprunter".equals(existingEmprunt.getStatut())) {
-	                return false; // Already borrowed and not returned
-	            } else if ("retourner".equals(existingEmprunt.getStatut())) {
-	                return false; // Prevent borrowing the same book multiple times
+	        // Temporary map to store emprunts that match the condition
+	        Map<String, Emprunt> emps = new HashMap<>();
+            Emprunt newEmp=findEmp(em.getNumero(), em.getISBN());
+	        // Iterate over the emprunts map
+	        for (Map.Entry<String, Emprunt> entry : emprunts.entrySet()) {
+	            Emprunt value = entry.getValue();
+                
+	            // Check if the value matches the one we are looking for
+	            if (value.getISBN().equals(newEmp.getISBN()) && value.getNumero().equals(newEmp.getNumero())) {
+	                emps.put(entry.getKey(), value);
 	            }
-	            return false; // Other cases, do nothing
 	        }
 
-	        // If the emprunt does not exist, add it to the map
+	        // Flag to check if any emprunt is already "emprunter"
+	        boolean isEmp = false;
+
+	        // Iterate over the emps map and check if any emprunt has the status "emprunter"
+	        for (Map.Entry<String, Emprunt> entry : emps.entrySet()) {
+	            if (entry.getValue().getStatut().equals("emprunter")) {
+	                isEmp = true;
+	                break; // Stop when a match is found
+	            }
+	        }
+
+	        // If an emprunt with status "emprunter" is found, return false
+	        if (isEmp) {
+	            return false;
+	        }
+
+	        // Otherwise, add the new emprunt to the main map
 	        emprunts.put(em.getId(), em);
 	        return true;
 	    }
+
+
 
 
 

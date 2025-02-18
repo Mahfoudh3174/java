@@ -81,7 +81,7 @@ public class Bibleo extends HttpServlet {
 
           
           if(UserDB.isUser(numero) || !UserDB.isUnique(nom)) {
-        	  throw new IllegalArgumentException("Bibliothecaire dejas existe.");
+        	  throw new IllegalArgumentException("L'utilisateur dejas existe.");
           }
           user.setRole("bibliothecaire");
           UserDB.addUser(user);

@@ -32,7 +32,7 @@
                      </li>
                 
                 <li>
-                <a class="navbar-brand" href="Logout">Logout</a>
+                <a class="navbar-brand" href="<%=request.getContextPath() %>/Logout">Logout</a>
                 </li>
             </ul>
         </div>
