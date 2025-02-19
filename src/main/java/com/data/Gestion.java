@@ -38,31 +38,31 @@ public class Gestion {
 	    }
 
 	    public static boolean addEmprunter(Emprunt em) {
-	        // Temporary map to store emprunts that match the condition
+	    	
 	        Map<String, Emprunt> emps = new HashMap<>();
             Emprunt newEmp=findEmp(em.getNumero(), em.getISBN());
-	        // Iterate over the emprunts map
-	        for (Map.Entry<String, Emprunt> entry : emprunts.entrySet()) {
+            if(newEmp==null) {
+            	emprunts.put(em.getId(), em);
+    	        return true;
+            }
+
+            for (Map.Entry<String, Emprunt> entry : emprunts.entrySet()) {
 	            Emprunt value = entry.getValue();
                 
-	            // Check if the value matches the one we are looking for
 	            if (value.getISBN().equals(newEmp.getISBN()) && value.getNumero().equals(newEmp.getNumero())) {
 	                emps.put(entry.getKey(), value);
 	            }
 	        }
 
-	        // Flag to check if any emprunt is already "emprunter"
 	        boolean isEmp = false;
 
-	        // Iterate over the emps map and check if any emprunt has the status "emprunter"
 	        for (Map.Entry<String, Emprunt> entry : emps.entrySet()) {
 	            if (entry.getValue().getStatut().equals("emprunter")) {
 	                isEmp = true;
-	                break; // Stop when a match is found
+	                break; 
 	            }
 	        }
 
-	        // If an emprunt with status "emprunter" is found, return false
 	        if (isEmp) {
 	            return false;
 	        }
