@@ -58,7 +58,7 @@
             <th>Nom</th>
             <th>Prenom</th>
             <th>Email</th>
-            <th>Action</th>
+            <th colspan="2">Action</th>
 <%
      
     for (User user:UserDB.getUsers().values()) {
@@ -71,6 +71,7 @@
             <td><%=user.getPrenom() %></td>
             <td><%=user.getEmail() %></td>
              <td><a class="btn btn-warning" href="<%=request.getContextPath()%>/Bib/EditUser?id=<%=user.getNumero()%>" >Editer</a></td>
+            <td><a href="<%=request.getContextPath() %>/Bib/UsersHistory?id=<%=user.getNumero() %>" class="btn btn-success"> L'archive</a></td>
             </tr>
 
     

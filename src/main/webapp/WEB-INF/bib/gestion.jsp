@@ -98,6 +98,7 @@
                 <th onclick="sortTable(6)" data-order="asc" style="cursor: pointer;">Date de retour prevu</th>
                 <th onclick="sortTable(7)" data-order="asc" style="cursor: pointer;">Date de retour</th>
                 <th onclick="sortTable(8)" data-order="asc" style="cursor: pointer;">Statut</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -128,6 +129,7 @@
                             %>
                         </td>
                         <td><%= em.getStatut() %></td>
+                        
                     </tr>
         <%
             }
