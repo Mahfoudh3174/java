@@ -46,4 +46,18 @@ public class BookDB {
 	            book.incriment();
 	        }
 	    }
+	    public static Map<String, Book> search(String valeur) {
+	        Map<String, Book> result = new HashMap<>();
+	        String lowerValeur = valeur.toLowerCase();
+
+	        for (Book book : books.values()) {
+	            if (book.getTitre().toLowerCase().contains(lowerValeur) || 
+	                book.getAuteur().toLowerCase().contains(lowerValeur) && book.getQuantity()>0) {
+	                result.put(book.getISBN(), book);
+	            }
+	        }
+
+	        return result;
+	    }
+
 }

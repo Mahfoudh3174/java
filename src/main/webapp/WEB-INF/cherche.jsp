@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.model.*" %>
+<%@ page import="java.util.*" %>
 <%@ page import="com.data.*" %>
 <!DOCTYPE html>
 <html>
@@ -18,57 +19,18 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<%=request.getContextPath() %>/Home">Home</a>
-               </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<%=request.getContextPath() %>/Home/History">Histoire</a>
-               </li>     
-                     <li class="nav-item">
-                     <a class="nav-link active" href="<%=request.getContextPath() %>/EditPassword">Change Password</a>
-                     </li>
-                
-                <li>
-                <a class="navbar-brand" href="Logout">Logout</a>
-                </li>
-            </ul>
-                        <form class="d-flex" action="<%=request.getContextPath() %>/Home/Cherche" method="GET">
-                <input class="form-control me-2" type="search" name="valeur" placeholder="Search books..." aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
     </div>
 </nav>
-
-<%
-    String success = (String) session.getAttribute("success");
-    String fail = (String) session.getAttribute("fail");
-%>
-
-<% if (success != null) { %>
-    <div class="alert alert-success text-center" role="alert">
-        <span class="font-weight-bold text-success"><%= success %></span>
-    </div>
-    <% session.removeAttribute("success"); %>
-<% } %>
-
-<% if (fail != null) { %>
-    <div class="alert alert-danger text-center" role="alert">
-        <span class="font-weight-bold text-danger"><%= fail %></span>
-    </div>
-    <% session.removeAttribute("fail"); %>
-<% } %>
 
 <h3 class="text-center">Book Collection</h3>
 <div class="container-fluid mt-4">
     <div class="row">
         <%
             String id = (String) session.getAttribute("id");
-
-            for (Book book : BookDB.getBooks().values()) {
-                if (book.getQuantity() > 0) {
+            Map<String, Book> resultat = (Map<String, Book>) request.getAttribute("resultat");
+            if (resultat != null) {
+                for (Book book : resultat.values()) {
+                    
         %>
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
@@ -88,9 +50,12 @@
                     </div>
                 </div>
         <%
+                    
                 }
             }
+            
         %>
+        
     </div>
 </div>
 
