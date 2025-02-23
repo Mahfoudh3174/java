@@ -82,7 +82,7 @@
     		Book book=BookDB.findBook((String)em.getISBN());
 
 %>
-     <tr>
+     <tr class="text-center">
       <td><%=book.getISBN() %></td>
             <td><%=book.getTitre() %></td>
             <td><%=book.getAuteur() %></td>
@@ -93,7 +93,7 @@
             <td>
             <%if(em.getStatut().equals("emprunter")) {%>
                         
-            <a class="btn btn-circle  btn-primary" href="Retourne?idEmp=<%=em.getId() %>">Retourner</a>
+            <span class="text-success" style="font-size: 19px">Presentez avec<br> votre ID</span>
             
             
             

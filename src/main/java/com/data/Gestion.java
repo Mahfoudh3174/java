@@ -73,16 +73,11 @@ public class Gestion {
 
 
 
-	    public static void retour(String idEmp) {
-	        Emprunt emp = findEmpId(idEmp);
-	        
-	            emp.setStatut("retourner");
+	    public static void retour(Retour retour) {
+         Emprunt em=findEmpId(retour.getIdEmp());
+	            retoures.put(retour.getIdEmp(), retour);
 
-	            Date date = new Date();
-	            Retour re = new Retour(date, idEmp);
-	            retoures.put(idEmp, re);
-
-	            BookDB.increment(emp.getISBN());
+	            BookDB.increment(em.getISBN());
 	        
 	    }
 

@@ -48,19 +48,14 @@
             session.removeAttribute("fail");
             } 
             
-            String idEmp=(String) session.getAttribute("idEmp");
+            String idRet=(String) session.getAttribute("idRet");
             
         %>
 
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center">Ajouter Date de Retour Prevue</h2>
-                <form action="Accept" method="post">
-                    <div class="form-group">
-                        
-                        <input type="hidden" name="idEmp" class="form-control" 
-                            value="<%= idEmp%>" >
-                    </div>
+                <h2 class="text-center">Ajouter Date de Retour Actuel</h2>
+                <form action="Retourner" method="post">
                     <div class="form-group">
                         <label for="nom">Date De Retour</label>
                         <input type="date" name="date" class="form-control" 

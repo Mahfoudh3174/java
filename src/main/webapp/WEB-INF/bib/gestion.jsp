@@ -8,36 +8,7 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script>
-        function sortTable(columnIndex) {
-            var table = document.getElementById("empruntTable");
-            var rows = Array.from(table.rows).slice(1); // Skip the header row
-            var isAscending = table.rows[0].cells[columnIndex].getAttribute("data-order") === "asc";
 
-            rows.sort(function (rowA, rowB) {
-                var cellA = rowA.cells[columnIndex].innerText.trim();
-                var cellB = rowB.cells[columnIndex].innerText.trim();
-
-                // Convert to numbers if possible
-                var numA = parseFloat(cellA);
-                var numB = parseFloat(cellB);
-
-                if (!isNaN(numA) && !isNaN(numB)) {
-                    return isAscending ? numA - numB : numB - numA;
-                } else {
-                    return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-                }
-            });
-
-            // Reverse order attribute for next click
-            table.rows[0].cells[columnIndex].setAttribute("data-order", isAscending ? "desc" : "asc");
-
-            // Re-append sorted rows
-            for (var i = 0; i < rows.length; i++) {
-                table.appendChild(rows[i]);
-            }
-        }
-    </script>
 </head>
 <body>
 
@@ -122,9 +93,9 @@
                             %>
                                 <a href="<%=request.getContextPath() %>/Bib/Accept?idEmp=<%= em.getId() %>" class="btn btn-primary">Accepter</a>
                             <%
-                                } else if (em.getStatut().equals("en attente")) {
+                                } else if (em.getStatut().equals("emprunter")) {
                             %>
-                                <a href="<%=request.getContextPath() %>/Bib/Gestion?idRet=<%= em.getId() %>" class="btn btn-primary">Confirmer</a>
+                                <a href="<%=request.getContextPath() %>/Bib/Retourner?idRet=<%= em.getId() %>" class="btn btn-primary">Confirmer <br> Retour</a>
                             <%
                                 } else {
                             %>
