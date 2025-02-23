@@ -13,7 +13,9 @@ public class UserDB {
         User admin = new User("admin", "admin", "admin");
         admin.setNumero("1");
         users.put(admin.getNumero(), admin);
-
+        User user=new User("houssein","0000","user");
+        user.setNumero("123");
+        users.put(user.getNumero(), user);
     }
 
     public static void addUser(User user) {

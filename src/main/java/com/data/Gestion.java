@@ -38,42 +38,31 @@ public class Gestion {
 	    }
 
 	    public static boolean addEmprunter(Emprunt em) {
-	    	
-	        Map<String, Emprunt> emps = new HashMap<>();
-            Emprunt newEmp=findEmp(em.getNumero(), em.getISBN());
-            if(newEmp==null) {
-            	emprunts.put(em.getId(), em);
-    	        return true;
-            }
-
-            for (Map.Entry<String, Emprunt> entry : emprunts.entrySet()) {
-	            Emprunt value = entry.getValue();
-                
-	            if (value.getISBN().equals(newEmp.getISBN()) && value.getNumero().equals(newEmp.getNumero())) {
-	                emps.put(entry.getKey(), value);
-	            }
-	        }
-
-	        boolean isEmp = false;
-
-	        for (Map.Entry<String, Emprunt> entry : emps.entrySet()) {
-	            if (entry.getValue().getStatut().equals("emprunter")) {
-	                isEmp = true;
-	                break; 
-	            }
-	        }
-
-	        if (isEmp) {
-	            return false;
-	        }
-
-	        // Otherwise, add the new emprunt to the main map
-	        emprunts.put(em.getId(), em);
-	        return true;
+	    	System.out.println(em.getNumero());
+	    	Map<String, Emprunt> emps=new HashMap<String, Emprunt>();
+	    	for(Emprunt temp:emprunts.values()) {
+	    		if(temp.getNumero().equals(em.getNumero()) && temp.getISBN().equals(em.getISBN())) {
+	    			emps.put(temp.getId(), temp);
+	    		}
+	    	}
+	    	boolean emprunter=true;
+	    	for(Emprunt temp:emprunts.values()) {
+	    		if(!temp.getStatut().equals("retourner")) {
+	    			emprunter=false;
+	    		}
+	    	}
+	    	if(emprunter) {
+	    		emprunts.put(em.getId(), em);
+	    		return true;
+	    	}
+	    	return false;
 	    }
-
-
-
+	    
+	    public static void deleteEmpIsbn(String isbn) {
+	    	emprunts.entrySet().removeIf(entry -> 
+             entry.getValue().getISBN().equals(isbn)
+        );
+	    }
 
 
 	    public static void deleteEmp(String numero, String isbn) {

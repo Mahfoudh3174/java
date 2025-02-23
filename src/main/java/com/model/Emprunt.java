@@ -12,18 +12,11 @@ public class Emprunt {
 		private Date dateE;
 		private Date dateR;
 		private String ISBN;
-		private String statut="emprunter"; 
+		private String statut="en cours"; 
 		
 	    public Emprunt() {
 	    	
-	        // Set dateE to the current date
-	        this.dateE = new Date();
-	        
-	        // Set dateR to one week after the current date
-	        Calendar calendar = Calendar.getInstance();
-	        calendar.setTime(this.dateE);
-	        calendar.add(Calendar.DAY_OF_MONTH, 7);
-	        this.dateR = calendar.getTime();
+
 	    }
 
 		public Emprunt(String numero,String iSBN) {
@@ -74,6 +67,14 @@ public class Emprunt {
 
 		public void setStatut(String statut) {
 			this.statut = statut;
+		}
+
+		public void setDateE(Date dateE) {
+			this.dateE = dateE;
+		}
+
+		public void setDateR(Date dateR) {
+			this.dateR = dateR;
 		}
 		
 		

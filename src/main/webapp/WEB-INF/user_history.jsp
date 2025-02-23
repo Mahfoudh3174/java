@@ -75,8 +75,10 @@
             <th colspan="2">Action</th>
             </tr>
 <%
+
     for (Emprunt em:Gestion.getEmprunts().values()) {
-    	if(em.getNumero().equals(id)){
+    	
+    	if(em.getNumero()!=null && em.getNumero().equals(id)){
     		Book book=BookDB.findBook((String)em.getISBN());
 
 %>
@@ -93,10 +95,10 @@
                         
             <a class="btn btn-circle  btn-primary" href="Retourne?idEmp=<%=em.getId() %>">Retourner</a>
             
-            <a href="<%=book.getImage() %>" class="btn btn-success">Visualiser</a>
+            
             
             <%}else{ %>
-            Retourner
+            <%=em.getStatut() %>
             <%} %>
         </td>
         

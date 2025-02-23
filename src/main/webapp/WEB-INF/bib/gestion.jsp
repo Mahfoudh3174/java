@@ -86,26 +86,26 @@
 <h3 class="text-center">Les Empruntes</h3>
 
 <div class="container-fluid mt-4">
-    <table class="table table-striped" id="empruntTable">
+      <table class="table table-striped" id="empruntTable">
         <thead>
             <tr>
-                <th onclick="sortTable(0)" data-order="asc" style="cursor: pointer;">ISBN</th>
-                <th onclick="sortTable(1)" data-order="asc" style="cursor: pointer;">Titre</th>
-                <th onclick="sortTable(2)" data-order="asc" style="cursor: pointer;">Matricule d'etudiant</th>
-                <th onclick="sortTable(3)" data-order="asc" style="cursor: pointer;">Nom de l'etudiant</th>
-                <th onclick="sortTable(4)" data-order="asc" style="cursor: pointer;">Email</th>
-                <th onclick="sortTable(5)" data-order="asc" style="cursor: pointer;">Date d'emprunt</th>
-                <th onclick="sortTable(6)" data-order="asc" style="cursor: pointer;">Date de retour prevu</th>
-                <th onclick="sortTable(7)" data-order="asc" style="cursor: pointer;">Date de retour</th>
-                <th onclick="sortTable(8)" data-order="asc" style="cursor: pointer;">Statut</th>
-                
+                <th>ISBN</th>
+                <th>Titre</th>
+                <th>Matricule d'étudiant</th>
+                <th>Nom de l'étudiant</th>
+                <th>Email</th>
+                <th>Date d'emprunt</th>
+                <th>Date de retour prévu</th>
+                <th>Date de retour</th>
+                <th>Statut</th>
             </tr>
         </thead>
         <tbody>
         <%
             for (Emprunt em : Gestion.getEmprunts().values()) {
-                User user = UserDB.findUserById(em.getNumero());
-                Book book = (Book) BookDB.findBook(em.getISBN());
+                if (!em.getStatut().equals("retourner")) {
+                    User user = UserDB.findUserById(em.getNumero());
+                    Book book = BookDB.findBook(em.getISBN());
         %>
                     <tr>
                         <td><%= book.getISBN() %></td>
@@ -115,23 +115,27 @@
                         <td><%= user.getEmail() %></td>
                         <td><%= em.getDateE() %></td>
                         <td><%= em.getDateR() %></td>
+                        <td><%= Gestion.findRetour(em.getId()) %></td>
                         <td>
                             <%
-                                if (em.getStatut().equals("retourner")) {
+                                if (em.getStatut().equals("en cours")) {
                             %>
-                                <%= Gestion.findRetour(em.getId()) %>
+                                <a href="<%=request.getContextPath() %>/Bib/Accept?idEmp=<%= em.getId() %>" class="btn btn-primary">Accepter</a>
+                            <%
+                                } else if (em.getStatut().equals("en attente")) {
+                            %>
+                                <a href="<%=request.getContextPath() %>/Bib/Gestion?idRet=<%= em.getId() %>" class="btn btn-primary">Confirmer</a>
                             <%
                                 } else {
                             %>
-                                Null
+                                <%= em.getStatut() %>
                             <%
                                 }
                             %>
                         </td>
-                        <td><%= em.getStatut() %></td>
-                        
                     </tr>
         <%
+                }
             }
         %>
         </tbody>

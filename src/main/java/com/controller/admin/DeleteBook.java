@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import com.data.BookDB;
+import com.data.Gestion;
 
 /**
  * Servlet implementation class DeleteBook
@@ -38,6 +39,7 @@ public class DeleteBook extends HttpServlet {
 			if(isbn==null || !BookDB.isBook(isbn)) {
 				throw new IllegalArgumentException("invalid parametre");
 			}
+			Gestion.deleteEmpIsbn(isbn);
 			BookDB.deleteBook(isbn);
 			System.out.println(request.getContextPath());
 			session.setAttribute("success", "suprimer avec success");

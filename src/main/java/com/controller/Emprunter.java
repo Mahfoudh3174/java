@@ -1,6 +1,6 @@
 package com.controller;
 
-import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletException; 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,10 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.Date;
 
 import com.data.BookDB;
 import com.data.Gestion;
-import com.data.UserDB;
+
 import com.model.Emprunt;
 
 /**
@@ -42,14 +43,17 @@ public class Emprunter extends HttpServlet {
 				throw new IllegalArgumentException("Invalid Parameter");
 			}
 			String id=(String ) session.getAttribute("id");
+			System.out.println("id user=" +id);
 			Emprunt em=new Emprunt();
+			em.setDateE(new Date());
 			em.setISBN(isbn);
 			em.setNumero(id);
+			
 			boolean e=Gestion.addEmprunter(em);
 			if(e==false) {
 				throw new IllegalArgumentException("Vous-avez ce Livre dejas");
 			}
-			session.setAttribute("success", "Emprunter avec Success");
+			session.setAttribute("success", "Emprunte est en cours de traitement");
 			response.sendRedirect(request.getContextPath()+"/Home");
 		}
 		catch (IllegalArgumentException e) {
