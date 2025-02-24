@@ -15,7 +15,13 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
+    <%
+    String role=(String) session.getAttribute("role");
+    if(role.equals("admin")){ %>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/Admin"><b>Dashboard</b></a>
+        <%}else{%>
         <a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Gestion"><b>Dashboard</b></a>
+        <%} %>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,6 +30,7 @@
             <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/Gestion">Gestion</a></li>
                 <li class="nav-item" ><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/Users">Etudiants</a></li>
                 <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/EditPassword">Change Password</a></li>
+
                 <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a></li>
             </ul>
         </div>
@@ -74,7 +81,7 @@
         <tbody>
         <%
             for (Emprunt em : Gestion.getEmprunts().values()) {
-                if (!em.getStatut().equals("retourner")) {
+                if (!em.getStatut().equals("retourner") && !em.getStatut().equals("en retarde")) {
                     User user = UserDB.findUserById(em.getNumero());
                     Book book = BookDB.findBook(em.getISBN());
         %>

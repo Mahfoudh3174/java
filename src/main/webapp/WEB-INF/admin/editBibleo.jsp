@@ -16,7 +16,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+             <ul class="navbar-nav">
                 <li class="nav-item">
                 <a class="nav-link active" href="<%=request.getContextPath() %>/Admin">Main</a>
                 </li>
@@ -25,6 +25,9 @@
                 </li>
                 <li class="nav-item">
                 <a class="nav-link active" href="<%=request.getContextPath() %>/EditPassword">Change Password</a>
+                </li>
+                <li>
+                <a class="navbar-brand" href="<%=request.getContextPath() %>/Bib/Gestion">Suich to Bib</a>
                 </li>
                 <li>
                 <a class="navbar-brand" href="<%=request.getContextPath() %>/Logout">Logout</a>
@@ -83,9 +86,13 @@
                             value="<%= (bib != null) ? bib.getEmail() : "" %>" placeholder="Entrer l'email">
                     </div>
                     <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" name="password" class="form-control" value="<%= (bib != null) ? bib.getPassword() : "" %>" placeholder="Nouveau mot de passe">
+                        <label for="role">Role</label>
+                        <select  name="role" class="form-control" >
+                            <option value="bibliothecaire">Bibliothecaire</option>
+                            <option value="admin">Admin</option>
+                            </select>
                     </div>
+
                     <button type="submit" class="btn btn-primary btn-block">Modifier</button>
                 </form>
             </div>

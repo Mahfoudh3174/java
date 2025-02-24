@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,18 +10,19 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import com.data.Gestion;
+import com.data.UserDB;
 
 /**
- * Servlet implementation class RetourneController
+ * Servlet implementation class DeleteUser
  */
-@WebServlet("/Home/Retourne")
-public class RetourneController extends HttpServlet {
+@WebServlet("/Admin/DeleteUser")
+public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RetourneController() {
+    public DeleteUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +34,18 @@ public class RetourneController extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
 		try {
-			String idEmp=request.getParameter("idEmp");
-			if(idEmp==null || !Gestion.isEmprunt(idEmp)) {
-				throw new IllegalArgumentException("Invalid Parameter");
+			String id=request.getParameter("id");
+			if(id==null || !UserDB.isUser(id)) {
+				throw new IllegalArgumentException("Invalid parameter");
 			}
-			Gestion.retour(idEmp);
-			session.setAttribute("success", "Retouner avec Success");
-			request.getRequestDispatcher("/WEB-INF/user_history.jsp").forward(request, response);
+		Gestion.supprimArchiv(id);
+			UserDB.deleteUser(id);
+			session.setAttribute("success", "Suprimer avec success");
+			response.sendRedirect(request.getContextPath()+"/Bib/Users");
 		}catch (IllegalArgumentException e) {
 			// TODO: handle exception
 			session.setAttribute("fail", e.getMessage());
-			request.getRequestDispatcher("/WEB-INF/user_history.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/Bib/Users");
 		}
 	}
 

@@ -69,9 +69,12 @@ public class RegisterController extends HttpServlet {
 
             // Validate Email
             String email = request.getParameter("email");
-            if (email == null || email.trim().isEmpty() || 
-                !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-                throw new IllegalArgumentException("email non valide.");
+            if (email == null || email.trim().isEmpty()) 
+            {
+                throw new IllegalArgumentException("email ne peut pas etre vide.");
+            }
+            if(!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            	throw new IllegalArgumentException("format de l'email est invalide.");
             }
             user.setEmail(email);
 
@@ -84,11 +87,9 @@ public class RegisterController extends HttpServlet {
 
             
             if(UserDB.isUser(numero)) {
-            	session.setAttribute("fail", "l'utilisateur dejas existe");
-            	response.sendRedirect(request.getContextPath()+"/Register");
-            	return;
-            	//request.getRequestDispatcher("/WEB-INF/auth/register.jsp").forward(request, response);
+            	throw new IllegalArgumentException("l'utilisateur dejas existe.");
             }
+            
             UserDB.addUser(user);
         	session.setAttribute("success", "user created successfuly");
         	response.sendRedirect(request.getContextPath()+"/Login");

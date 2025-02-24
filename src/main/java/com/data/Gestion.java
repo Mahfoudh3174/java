@@ -38,8 +38,15 @@ public class Gestion {
 	    }
 
 	    public static boolean addEmprunter(Emprunt em) {
-	    	System.out.println(em.getNumero());
+	    	
+	    	if(Gestion.findEmp(em.getNumero(), em.getISBN())==null) {
+	    		emprunts.put(em.getId(), em);
+	    		return true;
+	    	}
+	    	 
 	    	Map<String, Emprunt> emps=new HashMap<String, Emprunt>();
+	    	
+	    	
 	    	for(Emprunt temp:emprunts.values()) {
 	    		if(temp.getNumero().equals(em.getNumero()) && temp.getISBN().equals(em.getISBN())) {
 	    			emps.put(temp.getId(), temp);
@@ -85,6 +92,13 @@ public class Gestion {
 	        Retour re = retoures.get(idEmp);
 	        return (re != null) ? re.getDateR() : null;
 	    }
+	    
+	    public static void supprimArchiv(String id) {
+	    	emprunts.entrySet().removeIf(entry -> 
+            entry.getValue().getNumero().equals(id)
+       );
+	    }
+	    
 	}
 
 

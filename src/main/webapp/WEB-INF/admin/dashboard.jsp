@@ -9,34 +9,7 @@
     <title>Admin Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <script>
-        function sortTable(columnIndex) {
-            var table = document.getElementById("bookTable");
-            var rows = Array.from(table.rows).slice(1); // Exclude header row
-            var isAscending = table.rows[0].cells[columnIndex].getAttribute("data-order") === "asc";
 
-            rows.sort(function (rowA, rowB) {
-                var cellA = rowA.cells[columnIndex].innerText.trim();
-                var cellB = rowB.cells[columnIndex].innerText.trim();
-
-                // Convert to numbers if possible
-                var numA = parseFloat(cellA);
-                var numB = parseFloat(cellB);
-
-                if (!isNaN(numA) && !isNaN(numB)) {
-                    return isAscending ? numA - numB : numB - numA;
-                } else {
-                    return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-                }
-            });
-
-            // Toggle sorting order for next click
-            table.rows[0].cells[columnIndex].setAttribute("data-order", isAscending ? "desc" : "asc");
-
-            // Re-append sorted rows
-            rows.forEach(row => table.appendChild(row));
-        }
-    </script>
 </head>
 <body>
 
@@ -57,6 +30,9 @@
                 </li>
                 <li class="nav-item">
                 <a class="nav-link active" href="<%=request.getContextPath() %>/EditPassword">Change Password</a>
+                </li>
+                <li>
+                <a class="navbar-brand" href="<%=request.getContextPath() %>/Bib/Gestion">Suich to Bib</a>
                 </li>
                 <li>
                 <a class="navbar-brand" href="<%=request.getContextPath() %>/Logout">Logout</a>
@@ -90,12 +66,12 @@
         <table class="table table-striped" id="bookTable">
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)" data-order="asc" style="cursor: pointer;">ISBN</th>
-                    <th onclick="sortTable(1)" data-order="asc" style="cursor: pointer;">Titre</th>
-                    <th onclick="sortTable(2)" data-order="asc" style="cursor: pointer;">Auteur</th>
+                    <th >ISBN</th>
+                    <th>Titre</th>
+                    <th >Auteur</th>
                     <th>Image</th>
-                    <th onclick="sortTable(4)" data-order="asc" style="cursor: pointer;">Date de publication</th>
-                    <th onclick="sortTable(5)" data-order="asc" style="cursor: pointer;">Quantité Disponible</th>
+                    <th >Date de publication</th>
+                    <th >Quantité Disponible</th>
                     <th colspan="2">Action</th>
                 </tr>
             </thead>

@@ -13,9 +13,7 @@ public class UserDB {
         User admin = new User("admin", "admin", "admin");
         admin.setNumero("1");
         users.put(admin.getNumero(), admin);
-        User user=new User("houssein","0000","user");
-        user.setNumero("123");
-        users.put(user.getNumero(), user);
+
     }
 
     public static void addUser(User user) {
@@ -31,12 +29,13 @@ public class UserDB {
     public static Map<String, User> getBib() {
         Map<String, User> bibs = new HashMap<>();
         for (User u : users.values()) {
-            if ("bibliothecaire".equals(u.getRole())) {
+            if (!"user".equals(u.getRole())) {
                 bibs.put(u.getNumero(), u);
             }
         }
         return bibs;
     }
+
 
     public static User findUser(String nom, String password) {
         return users.values().stream()

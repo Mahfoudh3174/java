@@ -17,13 +17,17 @@
             <div class="alert alert-success text-center" role="alert">
                 <%= success %>
             </div>
-        <% } %>
+        <% 
+        session.removeAttribute("success");
+        } %>
 
         <% if (fail != null) { %>
             <div class="alert alert-danger text-center" role="alert">
                 <%= fail %>
             </div>
-        <% } %>
+        <%
+        session.removeAttribute("fail");
+        } %>
         <div class="row justify-content-center">
             <div class="col-md-6">
            

@@ -35,14 +35,14 @@ public class AuthFilter extends HttpFilter implements Filter {
         String path = req.getRequestURI();
         boolean isPublicPath = path.endsWith("Login") || path.endsWith("Register") || path.contains("Home") || path.startsWith("Logout");
 
-        System.out.println("AuthFilter processing request: " + path);
+        
 
         if (isPublicPath || (session != null && session.getAttribute("role") != null)) {
             // Proceed with the request if user is authenticated or accessing a public page
             chain.doFilter(request, response);
         } else {
             // Redirect to login page if user is not authenticated
-        	System.out.println ("Unauthorized access attempt: " + path);
+        	
             res.sendRedirect(req.getContextPath() + "/Login");
         }
     

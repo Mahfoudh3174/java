@@ -92,15 +92,20 @@ public class EditBibleo extends HttpServlet {
               throw new IllegalArgumentException("email non valide.");
           }
           user.setEmail(email);
-
-          // Validate Password
-          String password = request.getParameter("password");
-          if (password == null || password.trim().isEmpty()) {
-              throw new IllegalArgumentException("Mot de passe ne peut pas etre vide.");
+          
+          //Valider role
+          String role = request.getParameter("role");
+          System.out.println("role"+role);
+          if (role == null || role.trim().isEmpty()) {
+              throw new IllegalArgumentException("role ne peu pas etre vide");
           }
-          user.setPassword(password);
+          if(!role.equals("bibliothecaire") && !role.equals("admin")) {
+        	  throw new IllegalArgumentException("role est invalide"); 
+          }
+          user.setRole(role);
 
-          user.setRole("bibliothecaire");
+
+          
           UserDB.editUser(user);
       	session.setAttribute("success", "user editer avec success");
       	session.removeAttribute("bib");

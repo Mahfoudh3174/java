@@ -76,15 +76,6 @@ public class Retourner extends HttpServlet {
 	            }
 	            Emprunt emp=Gestion.findEmpId(idRet);
 	            
-	            
-	            if(emp.getDateR().before(re)) {
-	            	emp.setStatut("en retarde");
-	            	throw new IllegalArgumentException("Le livre est En retarde ");
-	            }
-	            
-					// TODO: handle exception
-	            
-	                
 				
 	            emp.setStatut("retourner");
 	            
@@ -92,6 +83,16 @@ public class Retourner extends HttpServlet {
 	            retour.setDateR(re);
 	            retour.setIdEmp(idRet);
 	            Gestion.retour(retour);
+	            if(emp.getDateR().before(re)) {
+	            	emp.setStatut("en retarde");
+	            	
+	            	throw new IllegalArgumentException("Le livre est En retarde ");
+	            }
+	            
+					// TODO: handle exception
+	            
+	                
+
 	            
 	            session.removeAttribute("idEmp");
 	            

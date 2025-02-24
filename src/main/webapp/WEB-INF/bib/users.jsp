@@ -15,7 +15,13 @@
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
         </h2>
-          <a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Gestion"><b>Dashboard </b></a>
+              <%
+    String role=(String) session.getAttribute("role");
+    if(role.equals("admin")){ %>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/Admin"><b>Dashboard</b></a>
+        <%}else{%>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/Bib/Gestion"><b>Dashboard</b></a>
+        <%} %>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -71,6 +77,12 @@
             <td><%=user.getPrenom() %></td>
             <td><%=user.getEmail() %></td>
              <td><a class="btn btn-warning" href="<%=request.getContextPath()%>/Bib/EditUser?id=<%=user.getNumero()%>" >Editer</a></td>
+             <%
+             if(role.equals("admin")){ %>
+            	 <td><a class="btn btn-warning" href="<%=request.getContextPath()%>/Admin/DeleteUser?id=<%=user.getNumero()%>" >Suprimer</a></td>
+             <%
+             }
+             %>
             <td><a href="<%=request.getContextPath() %>/Bib/UsersHistory?id=<%=user.getNumero() %>" class="btn btn-success"> L'archive</a></td>
             </tr>
 

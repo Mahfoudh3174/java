@@ -19,7 +19,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav"> 
+            <ul class="navbar-nav">
                 <li class="nav-item">
                 <a class="nav-link active" href="<%=request.getContextPath() %>/Admin">Main</a>
                 </li>
@@ -28,6 +28,9 @@
                 </li>
                 <li class="nav-item">
                 <a class="nav-link active" href="<%=request.getContextPath() %>/EditPassword">Change Password</a>
+                </li>
+                <li>
+                <a class="navbar-brand" href="<%=request.getContextPath() %>/Bib/Gestion">Suich to Bib</a>
                 </li>
                 <li>
                 <a class="navbar-brand" href="<%=request.getContextPath() %>/Logout">Logout</a>
