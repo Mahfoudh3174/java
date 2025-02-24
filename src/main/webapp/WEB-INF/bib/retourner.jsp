@@ -61,7 +61,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h2 class="text-center">Ajouter Date de Retour Actuel</h2>
-                <form action="Retourner" method="post">
+                <form action="<%=request.getContextPath() %>/Bib/Retourner" method="post">
                     <div class="form-group">
                         <label for="nom">Date De Retour</label>
                         <input type="date" name="date" class="form-control" 

@@ -100,7 +100,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h2 class="text-center">Add Book</h2>
-                <form action="Admin" method="post">
+                <form action="<%=request.getContextPath() %>/Admin" method="post">
                     <div class="form-group">
                         <label>ISBN</label>
                         <input type="text" name="isbn" class="form-control" placeholder="Enter ISBN">

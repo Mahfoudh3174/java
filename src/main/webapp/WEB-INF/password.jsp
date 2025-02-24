@@ -12,7 +12,7 @@
 
 <%
 String id = (String) session.getAttribute("id");
-String role = "user"; // القيمة الافتراضية
+String role = "user";  
 
 if (id != null && UserDB.getUsers().containsKey(id)) {
     role = UserDB.getUsers().get(id).getRole();
@@ -68,7 +68,7 @@ String fail = (String) session.getAttribute("fail");
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h2 class="text-center">Changer le mot de passe</h2>
-            <form action="EditPassword" method="post">
+            <form action="<%=request.getContextPath() %>/EditPassword" method="post">
                 <div class="form-group">
                     <label for="oldpassword">Ancien mot de passe</label>
                     <input type="password" name="oldpassword" class="form-control" required>

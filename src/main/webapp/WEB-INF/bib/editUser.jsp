@@ -59,7 +59,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h2 class="text-center">Modifier Utilisateur</h2>
-                <form action="EditUser" method="post">
+                <form action="<%=request.getContextPath() %>/Bib/EditUser" method="post">
                     <div class="form-group">
                         
                         <input type="hidden" name="numero" class="form-control" 

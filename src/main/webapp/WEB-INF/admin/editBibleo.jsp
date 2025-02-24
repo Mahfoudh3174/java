@@ -64,7 +64,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h2 class="text-center">Modifier Bibliothécaire</h2>
-                <form action="EditBibleo" method="post">
+                <form action="<%=request.getContextPath() %>/Admin/EditBibleo" method="post">
                     <div class="form-group">
                         <label for="numero">Numéro</label>
                         <input type="hidden" name="numero" class="form-control" 

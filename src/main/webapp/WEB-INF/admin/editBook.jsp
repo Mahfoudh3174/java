@@ -75,7 +75,7 @@
             <div class="col-md-6">
            
                 
-                <form action="EditBook" method="post">
+                <form action="<%=request.getContextPath() %>/Admin/EditBook" method="post">
                     <div class="form-group">
                         
                         <input type="hidden" name="isbn" class="form-control"  value="<%=book.getISBN()  %>">
