@@ -81,8 +81,8 @@
                 </thead>
                 <tbody>
                     <%
-                        for (User user : UserDB.getBib().values()) {
-                            if (!user.getNumero().equals(id)) {
+                        for (User user : UserDB.getUsers().values()) {
+                            if (!user.getNumero().equals(id) && user.getRole().equals("bibliothecaire")) {
                     %>
                             <tr>
                                 <td><%= user.getNumero() %></td>

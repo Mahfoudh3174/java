@@ -40,7 +40,7 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
+		 HttpSession session = request.getSession();
           try {
         	  User user=new User();
             // Validate Numero
@@ -48,6 +48,11 @@ public class RegisterController extends HttpServlet {
             if (numero == null || numero.trim().isEmpty()) {
                 throw new IllegalArgumentException("Numero ne peut pas etre vide.");
             }
+            
+            if(UserDB.isUser(numero)) {
+            	throw new IllegalArgumentException("l'utilisateur dejas existe.");
+            }
+            
             user.setNumero(numero);
 
             // Validate Nom
@@ -59,7 +64,8 @@ public class RegisterController extends HttpServlet {
           	  throw new IllegalArgumentException("utilisateur dejas existe.");
             }
             user.setNom(nom);
-
+            
+;
             // Validate Prenom
             String prenom = request.getParameter("prenom");
             if (prenom == null || prenom.trim().isEmpty()) {
@@ -73,7 +79,7 @@ public class RegisterController extends HttpServlet {
             {
                 throw new IllegalArgumentException("email ne peut pas etre vide.");
             }
-            if(!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            if(!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]{5,10}+$")) {
             	throw new IllegalArgumentException("format de l'email est invalide.");
             }
             user.setEmail(email);
@@ -86,9 +92,7 @@ public class RegisterController extends HttpServlet {
             user.setPassword(password);
 
             
-            if(UserDB.isUser(numero)) {
-            	throw new IllegalArgumentException("l'utilisateur dejas existe.");
-            }
+
             
             UserDB.addUser(user);
         	session.setAttribute("success", "user created successfuly");

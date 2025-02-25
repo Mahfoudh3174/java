@@ -15,25 +15,15 @@ public class UserDB {
         users.put(admin.getNumero(), admin);
 
     }
-
+// ajouter un utilisateur
     public static void addUser(User user) {
         
         users.put(user.getNumero(), user);
           
     }
-
+// retourn l'utilisateur
     public static Map<String, User> getUsers() {
         return users;
-    }
-
-    public static Map<String, User> getBib() {
-        Map<String, User> bibs = new HashMap<>();
-        for (User u : users.values()) {
-            if (!"user".equals(u.getRole())) {
-                bibs.put(u.getNumero(), u);
-            }
-        }
-        return bibs;
     }
 
 
@@ -43,7 +33,7 @@ public class UserDB {
                 .findFirst()
                 .orElse(null);
     }
-
+// pour eviter la repetition de nom 
     public static boolean isUnique(String nom) {
         return users.values().stream().noneMatch(user -> user.getNom().equals(nom));
     }

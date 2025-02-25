@@ -36,16 +36,7 @@ public class User {
 		this.nom = nom;
 		this.password = password;
 	}
-    @Override
-    public String toString() {
-        return "User{" +
-               "numero='" + numero + '\'' +
-               ", nom='" + nom + '\'' +
-               ", role='" + role + '\'' +
-               ", email='" + email + '\'' +
-               ",password='"+password+'\''+
-               '}';
-    }
+
 
 	public String getNumero() {
 		return numero;
