@@ -16,14 +16,14 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="Admin"><b>Dashboard</b></a>
+        <a class="navbar-brand" href="<%=request.getContextPath() %>/Admin"><b>Dashboard</b></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                <a class="nav-link active" href="<%=request.getContextPath() %>/Admin">Main</a>
+                <a class="nav-link active" href="http://localhost:8080/lib/Admin">Main</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link active" href="<%=request.getContextPath() %>/Admin/Bibleo">Bibliothécaires</a>
