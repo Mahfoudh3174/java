@@ -29,7 +29,7 @@
           <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/Gestion">Gestion</a></li>
                 <li class="nav-item" ><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/Users">Etudiants</a></li>
-                <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/Bib/EditPassword">Change Password</a></li>
+                <li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/EditPassword">Change Password</a></li>
 
                 <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a></li>
             </ul>
