@@ -10,7 +10,7 @@
 <body>
 
     <div class="alert alert-secondary d-flex justify-content-center align-items-center vh-100" role="alert">
-        <h1 class="display-1 font-weight-bold text-danger">Error 404</h1>
+        <h1 class="display-1 font-weight-bold text-danger">403 Forbidden</h1>
     </div>
 
 

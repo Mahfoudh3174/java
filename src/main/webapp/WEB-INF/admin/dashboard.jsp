@@ -87,7 +87,7 @@
                     <td><%= book.getPublication() %></td>
                     <td><%= book.getQuantity() %></td>
                     <td><a class="btn btn-primary" href="<%=request.getContextPath() %>/Admin/EditBook?isbn=<%= book.getISBN() %>">Edit</a></td>
-                    <td><a href="<%=request.getContextPath() %>/Admin/DeleteBook?isbn=<%= book.getISBN() %>" class="btn btn-danger">Delete</a></td>
+                    <td><a  onclick="return confirmDelete(event)" href="<%=request.getContextPath() %>/Admin/DeleteBook?isbn=<%= book.getISBN() %>" class="btn btn-danger">Delete</a></td>
                 </tr>
                 <%
                     }
@@ -130,7 +130,13 @@
             </div>
         </div>
     </div>
-
+<script>
+function confirmDelete(event) {
+    if (!confirm('Supprimer le livre?')) {
+        event.preventDefault(); // Stop the navigation if user clicks "Annuler"
+    }
+}
+</script>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

@@ -93,7 +93,7 @@
                                 <td>
                                     <a class="btn btn-primary btn-sm" href="<%= request.getContextPath() %>/Admin/EditBibleo?id=<%= user.getNumero() %>">Edit</a>
                                     <a class="btn btn-danger btn-sm" href="<%= request.getContextPath() %>/Admin/DeleteBibleo?id=<%= user.getNumero() %>" 
-                                       onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                                        onclick="return confirmDelete(event)">Delete</a>
                                 </td>
                             </tr>
                     <%
@@ -135,7 +135,13 @@
             </div>
         </div>
     </div>
-
+<script>
+function confirmDelete(event) {
+    if (!confirm('Supprimer le livre?')) {
+        event.preventDefault(); // Stop the navigation if user clicks "Annuler"
+    }
+}
+</script>
     <!-- JS Scripts (Ensure jQuery is loaded before Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

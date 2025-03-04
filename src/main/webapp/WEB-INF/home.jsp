@@ -16,7 +16,12 @@
     </style>
 </head>
 <body>
-
+<%
+String role=(String) session.getAttribute("role");
+if(!role.equals("user")){
+	response.sendRedirect(request.getContextPath()+"/Error");
+}
+%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="<%=request.getContextPath() %>/Home"><b>Collection</b></a>
