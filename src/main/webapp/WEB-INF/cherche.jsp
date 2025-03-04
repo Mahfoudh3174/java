@@ -9,6 +9,13 @@
     <meta charset="UTF-8">
     <title>Book Collection</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-img-top {
+            object-fit: cover;
+            width: 100%;
+            height: 400px;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,7 +31,7 @@
 
 <h3 class="text-center">Book Collection</h3>
 <div class="container-fluid mt-4">
-    <div class="row">
+    <div class="row m-auto">
         <%
             String id = (String) session.getAttribute("id");
             Map<String, Book> resultat = (Map<String, Book>) request.getAttribute("resultat");
@@ -32,23 +39,19 @@
                 for (Book book : resultat.values()) {
                     
         %>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="<%= book.getImage() %>" class="card-img-top" alt="Book Image" style="width: 300px; height: 400px">
-                        <div class="card-body">
-                            <h5 class="card-title">Titre: 
-                                <span class="text-primary font-weight-bold"><%= book.getTitre() %></span>
-                            </h5>
-                            <p class="card-text font-weight-bold">Auteur: 
-                                <span class="text-secondary"><%= book.getAuteur() %></span>
-                            </p>
-                            <p class="card-text font-weight-bold">Année de publication: 
-                                <span class="text-info"><%= book.getPublication() %></span>
-                            </p>
-                            <a href="<%=request.getContextPath() %>/Home/Emprunter?isbn=<%= book.getISBN() %>" class="btn btn-primary">Emprunter</a>
-                        </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="<%= book.getImage() %>" class="card-img-top" alt="Book Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Titre: 
+                            <span class="text-primary font-weight-bold"><%= book.getTitre() %></span>
+                        </h5>
+                        <p class="card-text"><strong>Auteur:</strong> <%= book.getAuteur() %></p>
+                        <p class="card-text"><strong>Année de publication:</strong> <%= book.getPublication() %></p>
+                        <a href="<%=request.getContextPath() %>/Home/Emprunter?isbn=<%= book.getISBN() %>" class="btn btn-primary">Emprunter</a>
                     </div>
                 </div>
+            </div>
         <%
                     
                 }

@@ -24,7 +24,7 @@ switch (role) {
         path = "Admin";
         break;
     case "bibliothecaire":
-        path = "Bib";
+        path = "Bib/Gestion";
         break;
     default:
         path = "Home";

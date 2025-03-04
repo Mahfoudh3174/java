@@ -66,7 +66,7 @@
                 <h2 class="text-center">Modifier Bibliothécaire</h2>
                 <form action="<%=request.getContextPath() %>/Admin/EditBibleo" method="post">
                     <div class="form-group">
-                        <label for="numero">Numéro</label>
+                        
                         <input type="hidden" name="numero" class="form-control" 
                             value="<%= (bib != null) ? bib.getNumero() : ""%>" >
                     </div>

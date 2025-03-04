@@ -55,7 +55,7 @@ public class RoleFilter extends HttpFilter implements Filter {
 
         // Restrict access based on role and URL path
         if (requestURI.startsWith(req.getContextPath() + "/Admin")) {
-            if (!"admin".equalsIgnoreCase(role)) {
+            if (!"admin".equals(role)) {
                 
                 res.sendRedirect(req.getContextPath() + "/Error"); // Redirect to error page
                 return;
