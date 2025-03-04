@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
                     // Redirect based on role
                     switch (user.getRole()) {
                         case "admin":
-                            request.getRequestDispatcher("WEB-INF/admin/dashboard.jsp").forward(request, response);
+                            request.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(request, response);
                             break;
                         case "bibliothecaire":
                             request.getRequestDispatcher("/WEB-INF/bib/gestion.jsp").forward(request, response);
